@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  userId           Int      @id @default(autoincrement())
+  qrCode           String   @unique
+  email            String   @unique
+  firstName        String
+  lastName         String
+  masterGroup      Group[]  @relation("groupMaster")
+  slaveGroup       Group[]  @relation("groupSlave")
+  borderCrossCount Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Group {
+  groupId                Int           @id @default(autoincrement())
+  groupName              String
+  joinId                 GroupJoinId[]
+  masters                User[]        @relation("groupMaster")
+  slaves                 User[]        @relation("groupSlave")
+  isAllowedBorderControl Boolean       @default(false)
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+}
+
+model GroupJoinId {
+  joinId         Int      @id @default(autoincrement())
+  isMaster       Boolean  @default(false)
+  maxUse         Int      @default(255)
+  currentUse     Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  joiningGroup   Group    @relation(fields: [joiningGroupId], references: [groupId])
+  joiningGroupId Int
+}
