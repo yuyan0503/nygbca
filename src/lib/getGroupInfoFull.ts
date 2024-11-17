@@ -2,9 +2,9 @@
 
 import prisma from "./prisma"
 
-export default async function getGroupInfoFull(groupId) {
+export default async function getGroupInfoFull(groupId: number) {
   try {
-    const findGroupId = parseInt(groupId)
+    const findGroupId = groupId
     const group = await prisma.group.findUniqueOrThrow({
       where: {
         groupId: findGroupId,
@@ -17,6 +17,10 @@ export default async function getGroupInfoFull(groupId) {
     return (group)
   }
   catch (err) {
-    throw new Error('error: ' + err.message)
+    if (err instanceof Error) {
+      throw new Error('error: ' + err.message)
+    } else {
+      throw new Error('error: unknown error occured')
+    }
   }
 }

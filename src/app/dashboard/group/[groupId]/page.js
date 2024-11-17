@@ -8,7 +8,7 @@ export default async function Page({ params }) {
   let groupUserData = {}
 
   try {
-    const groupId = parameters.groupId
+    const groupId = parseInt(parameters.groupId)
     groupData = await getGroupInfo(groupId)
     groupUserData = await getGroupInfoFull(groupId)
     console.log(groupUserData)

@@ -1,7 +1,7 @@
 import authnicateByQr from "./authnicateByQr";
 import prisma from "./prisma";
 
-export default async function getAllGroupOfUuser(qrCodeId) {
+export default async function getAllGroupOfUuser(qrCodeId: string) {
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
@@ -15,6 +15,10 @@ export default async function getAllGroupOfUuser(qrCodeId) {
     return (user)
   }
   catch (err) {
-    throw new Error(' error happened while getting user group info: ' + err.message)
+    if (err instanceof Error) {
+      throw new Error(' error happened while getting user group info: ' + err.message)
+    } else {
+      throw new Error(' error happened while getting user group info: unknown error occured')
+    }
   }
 }
