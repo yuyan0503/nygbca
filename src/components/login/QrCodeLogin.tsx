@@ -11,7 +11,7 @@ export default function QrCodeLogin() {
   const [scannerActivated, setScannerActivated] = useState(true)
   const [loginError, setLoginError] = useState(false)
 
-  const onNewScanResult = async (decodedText, decodedResult) => {
+  const onNewScanResult = async (decodedText: any, decodedResult: any) => {
 
     const qrCodeId = decodedText.split('/').filter(Boolean).pop()
 

@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import Html5QrcodePlugin from '../Html5QrcodePlugin'
 import ToastBox from '../ToastBox';
 
-export default function QrCodeSignup({ children }) {
+export default function QrCodeSignup({ children }: { children: ReactNode }) {
   const [scannerActivated, setScannerActivated] = useState("true")
 
-  const onNewScanResult = async (decodedText, decodedResult) => {
+  const onNewScanResult = async (decodedText: any, decodedResult: any) => {
 
     const qrCodeId = decodedText.split('/').filter(Boolean).pop()
 

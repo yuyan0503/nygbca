@@ -1,11 +1,11 @@
 "use client"
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, ReactNode } from 'react'
 import QrCodeLogin from './QrCodeLogin'
 import QrCodeIdLogin from './QrCodeIdLogin'
 
-export default function LoginForm({ children }) {
+export default function LoginForm({ children }: { children: ReactNode }) {
   const [loginMethod, setLoginMethod] = useState("unset")
   if (loginMethod == "unset") {
     return (
