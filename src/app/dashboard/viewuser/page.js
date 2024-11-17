@@ -11,7 +11,7 @@ export default async function Page() {
     const cookieStore = await cookies()
     const qrCodeId = cookieStore.get('qrCodeId').value
     userData = await authnicateByQr(qrCodeId)
-    console.log(userData)
+
   } catch (error) {
     return (<a>{`error: ${error}`}</a>)
   }

@@ -10,7 +10,6 @@ export default async function getGroupInfo(groupId: number) {
         groupId: findGroupId,
       },
     })
-    console.log(group)
     return (group)
   }
   catch (err) {

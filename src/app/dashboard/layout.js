@@ -12,7 +12,7 @@ export default async function Layout({ children }) {
     const userInfo = await authnicateByQr(qrCodeId)
 
   } catch (error) {
-    console.log(error)
+    console.error(error)
     // Handle any errors from authnicateByQr here
     return (
       <LoginFormChooser />

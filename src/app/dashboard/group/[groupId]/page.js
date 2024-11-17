@@ -11,7 +11,6 @@ export default async function Page({ params }) {
     const groupId = parseInt(parameters.groupId)
     groupData = await getGroupInfo(groupId)
     groupUserData = await getGroupInfoFull(groupId)
-    console.log(groupUserData)
 
   } catch (error) {
     return (<a>{`error: ${error}`}</a>)
