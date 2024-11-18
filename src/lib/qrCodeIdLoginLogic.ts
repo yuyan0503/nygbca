@@ -13,16 +13,10 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
     const result = await authnicateByQr(qrCodeId);
     const cookieStore = await cookies()
     cookieStore.set('qrCodeId', qrCodeId)
+    redirect("/dashboard")
 
   } catch (error) {
     // Handle any errors from authnicateByQr here
-
-    if (error instanceof Error) {
-      return ("Authentication failed:" + error.message);
-    } else {
-      return ("Authentication failed:unknown error occured");
-    }
+    console.error(error)
   }
-
-  redirect("/dashboard")
 }
