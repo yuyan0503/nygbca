@@ -2,9 +2,9 @@
 import { redirect } from "next/dist/server/api-utils";
 import prisma from "./prisma";
 
-export default async function createGroup(formData: any) {
+export default async function createGroup(formData: FormData) {
   try {
-    const groupName = formData.get('groupName');
+    const groupName = String(formData.get('groupName'));
     const group = await prisma.group.create({
       data: {
         groupName,

@@ -6,9 +6,9 @@ import { cookies } from 'next/headers'
 
 import authnicateByQr from '@/lib/authnicateByQr';
 
-export default async function QrCodeIdLoginLogic(formData: any) {
+export default async function QrCodeIdLoginLogic(formData: FormData) {
   try {
-    const qrCodeId = formData.get('qrCodeId');
+    const qrCodeId = String(formData.get('qrCodeId'));
     // Use formData.get() to retrieve the value
     const result = await authnicateByQr(qrCodeId);
     const cookieStore = await cookies()
@@ -18,7 +18,7 @@ export default async function QrCodeIdLoginLogic(formData: any) {
     // Handle any errors from authnicateByQr here
 
     if (error instanceof Error) {
-      return ("Authentication failed:" + error);
+      return ("Authentication failed:" + error.message);
     } else {
       return ("Authentication failed:unknown error occured");
     }
