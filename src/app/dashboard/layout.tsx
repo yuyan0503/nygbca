@@ -3,12 +3,19 @@ import { cookies } from 'next/headers'
 import NavBar from '@/components/NavBar'
 import authnicateByQr from '@/lib/authnicateByQr'
 import LoginFormChooser from '@/components/login/LoginFormChooser'
+import { ReactNode } from 'react'
 
-export default async function Layout({ children }) {
+export default async function Layout({ children }: { children: ReactNode }) {
 
   try {
     const cookieStore = await cookies()
-    const qrCodeId = cookieStore.get('qrCodeId').value
+    const qrCodeIdCookie = cookieStore.get('qrCodeId')
+
+    if (!qrCodeIdCookie) {
+      // If the cookie is not found, return children
+      return (<LoginFormChooser />)
+    }
+    const qrCodeId = qrCodeIdCookie.value
     const userInfo = await authnicateByQr(qrCodeId)
 
   } catch (error) {

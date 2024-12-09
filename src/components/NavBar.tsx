@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function logout() {
   document.cookie = "qrCodeId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  window.location.reload()
+  window.location.assign("/login")
 }
 
 export default function NavBar() {
@@ -37,7 +37,7 @@ export default function NavBar() {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">39thCulture</a>
+        <Link className="btn btn-ghost text-xl" href="/dashboard">39thCulture</Link>
       </div>
       <div className="navbar-end">
         <button className="btn" onClick={() => logout()}>Logout</button>

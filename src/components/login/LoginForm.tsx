@@ -25,10 +25,10 @@ export default function LoginForm({ children }: { children: ReactNode }) {
     )
   } else if (loginMethod == "qrCodeId") {
     return (
-      <>{children}</>
+      <div>{children}</div>
     )
   } else {
-    return ("error")
+    return (<h1>error: invalid login method</h1>)
   }
 
 }
