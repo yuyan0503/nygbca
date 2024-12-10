@@ -2,15 +2,15 @@ This is a project created with [Next.js](https://nextjs.org) , which is bootstra
 
 ## Getting Started
 
-After cloning and downloading the required dependencies, run the development server:
+After cloning and downloading the required dependencies, create dev.db in prisma/, and then run the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) with your browser to see the result. (use qrCodeId 12345 for testing, but remember to remove dev.db from your commits!)
+Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) with your browser to see the result.
 
-Everything for this web app should be included within the /src file. 
+Most part of the web app should be included within the /src file. 
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
