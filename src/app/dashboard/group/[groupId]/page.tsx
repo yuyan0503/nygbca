@@ -1,5 +1,5 @@
-import getGroupInfo from "@/lib/getGroupInfo";
-import getGroupInfoFull from "@/lib/getGroupInfoFull";
+import getGroupInfo from "@/lib/group/getGroupInfo";
+import getGroupInfoFull from "@/lib/group/getGroupInfoFull";
 import Link from "next/link";
 
 export default async function Page({ params }: { params: Promise<{ groupId: string }> }) {

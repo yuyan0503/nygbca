@@ -2,7 +2,7 @@
 
 import Form from "next/form";
 import Link from "next/link";
-import createNewGroupFlow from "@/lib/createNewGroupFlow";
+import createNewGroupFlow from "@/lib/group/createNewGroupFlow";
 
 export default async function Page() {
   return (

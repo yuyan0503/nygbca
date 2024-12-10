@@ -1,7 +1,7 @@
 "use server"
 
-import authnicateByQr from "./authnicateByQr";
-import prisma from "./prisma";
+import authnicateByQr from "../authnicateByQr";
+import prisma from "../prisma";
 
 export default async function joinGroup(qrCodeId:string, updatingGroupId:number, isMaster:boolean) {
 

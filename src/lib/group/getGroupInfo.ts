@@ -1,24 +1,20 @@
 "use server"
 
-import prisma from "./prisma"
+import prisma from "../prisma"
 
 /**
  * 
  * @param groupId 
- * @returns full group info, including masters and slaves
- * @throws new Error if group was not found, etc. 
+ * @returns group info
+ * @throws new Error if group was not found, etc.
  */
-export default async function getGroupInfoFull(groupId: number) {
+export default async function getGroupInfo(groupId: number) {
   try {
     const findGroupId = groupId
     const group = await prisma.group.findUniqueOrThrow({
       where: {
         groupId: findGroupId,
       },
-      include: {
-        masters: true,  // Include master groups
-        slaves: true    // Include slave groups
-      }
     })
     return (group)
   }

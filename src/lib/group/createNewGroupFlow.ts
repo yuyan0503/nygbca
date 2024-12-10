@@ -1,9 +1,9 @@
 "use server"
 import { cookies } from "next/headers";
-import createGroup from "@/lib/createGroup";
-import joinGroup from "@/lib/joinGroup";
+import createGroup from "./createGroup";
+import joinGroup from "@/lib/group/joinGroup";
 import { redirect } from 'next/navigation'
-import { NoQrCodeIdInCookieError } from "./errors/errorclasses";
+import { NoQrCodeIdInCookieError } from "../errors/errorclasses";
 
 
 export default async function createNewGroupFlow(formData: FormData) {
