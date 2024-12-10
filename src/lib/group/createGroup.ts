@@ -1,5 +1,5 @@
 "use server"
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from 'next/navigation'
 import prisma from "../prisma";
 
 /**
@@ -17,10 +17,9 @@ export default async function createGroup(formData: FormData) {
     return group
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error("creating group failed:", error);
+      throw new Error(`creating group failed: ${error.message}`);
     } else {
       throw new Error("unknown error occured");
     }
   }
-  //  redirect(`/dashboard/groups/${group.groupId}`)
 }
