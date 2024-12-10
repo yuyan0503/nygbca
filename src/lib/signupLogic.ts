@@ -6,6 +6,12 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { NoQrCodeIdInCookieError } from "./errors/errorclasses";
 
+/**
+ * 
+ * @param formData 
+ * @returns redirects to /dashboard
+ * @throws new Error if form is incomplete, or some other error occurs e.g. a duplicate email
+ */
 export default async function signupLogic(formData: FormData) {
   try {
     const cookieStore = await cookies()
@@ -34,9 +40,11 @@ export default async function signupLogic(formData: FormData) {
       },
     });
 
-  } catch (error) {
-    // Handle any errors here
-    return console.error("sign up failed:", error);
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error('An unknown error occurred.');
   }
   redirect("/dashboard")
 }
