@@ -1,6 +1,6 @@
 "use server"
 import { redirect } from "next/dist/server/api-utils";
-import prisma from "./prisma";
+import prisma from "../prisma";
 
 /**
  * @returns info of group that was just created.
