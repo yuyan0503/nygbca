@@ -19,7 +19,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
     const userInfo = await authnicateByQr(qrCodeId)
 
   } catch (error) {
-    console.error(error)
     // Handle any errors from authnicateByQr here
     return (
       <LoginFormChooser />

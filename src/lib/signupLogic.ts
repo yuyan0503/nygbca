@@ -36,7 +36,7 @@ export default async function signupLogic(formData: FormData) {
 
   } catch (error) {
     // Handle any errors here
-    console.error("sign up failed:", error);
+    return console.error("sign up failed:", error);
   }
   redirect("/dashboard")
 }

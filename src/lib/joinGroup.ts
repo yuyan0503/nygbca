@@ -61,6 +61,6 @@ export default async function joinGroup(qrCodeId:string, updatingGroupId:number,
     return(updateGroup)
 
   } catch (error) {
-    console.error("joining group failed:", error);
+    return console.error("joining group failed:", error);
   }
 }

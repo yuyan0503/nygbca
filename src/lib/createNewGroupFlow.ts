@@ -23,7 +23,7 @@ export default async function createNewGroupFlow(formData: FormData) {
   }
 
   catch (error) {
-    console.error(error)
+    return console.error(error)
   }
 
 }

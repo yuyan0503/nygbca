@@ -17,6 +17,6 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
 
   } catch (error) {
     // Handle any errors from authnicateByQr here
-    console.error(error)
+    return console.error(error)
   }
 }
