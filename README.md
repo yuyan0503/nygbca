@@ -2,7 +2,13 @@ This is a project created with [Next.js](https://nextjs.org) , which is bootstra
 
 ## Getting Started
 
-After cloning and downloading the required dependencies, create dev.db in prisma/, and then run the development server:
+After cloning and downloading the required dependencies, create dev.db in prisma/, and then run
+
+```bash
+npx prisma db push
+```
+
+ and then run the development server:
 
 ```bash
 npm run dev
