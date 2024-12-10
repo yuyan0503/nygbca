@@ -5,7 +5,12 @@ import Link from "next/link"
 
 export default async function Page() {
   const cookieStore = await cookies()
-  const qrCodeId = cookieStore.get('qrCodeId').value
+  const qrCodeId = cookieStore.get('qrCodeId')?.value
+  if (qrCodeId == undefined) {
+    return (
+      <a>a cookie error occured.Please log out and sign in again.</a>
+    )
+  }
   const user = await getAllGroupOfUuser(qrCodeId)
   const masterGroup = user.masterGroup
   const slaveGroup = user.slaveGroup
