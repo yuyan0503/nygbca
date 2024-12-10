@@ -2,6 +2,12 @@
 
 import prisma from "./prisma"
 
+/**
+ * 
+ * @param groupId 
+ * @returns group info
+ * @throws new Error if group was not found, etc.
+ */
 export default async function getGroupInfo(groupId: number) {
   try {
     const findGroupId = groupId

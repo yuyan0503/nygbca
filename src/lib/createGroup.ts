@@ -2,6 +2,10 @@
 import { redirect } from "next/dist/server/api-utils";
 import prisma from "./prisma";
 
+/**
+ * @returns info of group that was just created.
+ * @throws new Error when creation of group fails
+ */
 export default async function createGroup(formData: FormData) {
   try {
     const groupName = String(formData.get('groupName'));

@@ -23,6 +23,10 @@ const createConfig = (props) => {
     return config;
 };
 
+/**
+ * must have a qrCodeSuccessCallback prop.
+ * @throws Error "qrCodeSuccessCallback is required callback." if it is not present.
+ */
 const Html5QrcodePlugin = (props) => {
 
     useEffect(() => {
