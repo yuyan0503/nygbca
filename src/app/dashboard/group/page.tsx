@@ -22,6 +22,7 @@ export default async function Page() {
           <Link role="button" className="btn" href="/dashboard">home</Link>
         </div>
         <div className="flex justify-end">
+          <Link role="button" className="btn" href="/dashboard/group/join">join group</Link>
           <Link role="button" className="btn" href="/dashboard/group/create">create group</Link>
         </div>
       </div>
