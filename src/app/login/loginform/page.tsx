@@ -11,6 +11,9 @@ export default async function Page({
   return (
     <div className="mx-auto max-w-xs">
       <div className="w-full flex flex-col items-center justify-center min-h-screen">
+        <div className="prose">
+          <h1 className="mb-2 text-center">Log in</h1>
+        </div>
         <Form action={QrCodeIdLoginLogic} className="w-full">
           <input type="hidden" name="continueUrl" value={continueUrl} />
           <div className="form-control mb-4 w-full">

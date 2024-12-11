@@ -27,5 +27,5 @@ export function middleware(request: NextRequest) {
 
 // Optional: Configure matcher to specify which paths this middleware should apply to
 export const config = {
-  matcher: ['/dashboard/:path*'], // Adjust this to your needs
+  matcher: ['/dashboard/:path*', "/bc/:path*"], // Adjust this to your needs
 };

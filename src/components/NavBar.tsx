@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function logout() {
   document.cookie = "qrCodeId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  window.location.assign("/login")
+  window.location.reload();
 }
 
 export default function NavBar() {
