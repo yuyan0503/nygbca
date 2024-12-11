@@ -14,13 +14,7 @@ export default async function PriviligedCgjidForm({ groupId }: { groupId: number
         </div>
       </div>
       <Form action={createGroupJoinIdLogic}>
-
-        <div className="form-control">
-          <label className="form-control">
-            <span className="label label-text">groupId</span>
-            <input type="text" name="groupId" placeholder="groupId" className="input input-bordered w-full max-w-xs" value={groupId} required readOnly />
-          </label>
-        </div>
+        <input type="hidden" name="groupId" placeholder="groupId" className="input input-bordered w-full max-w-xs" value={groupId} required readOnly />
 
         <div className="form-control">
           <label className="form-control">

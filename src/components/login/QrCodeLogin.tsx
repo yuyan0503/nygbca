@@ -1,33 +1,34 @@
 "use client"
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import Html5QrcodePlugin from '../Html5QrcodePlugin';
 import ToastBox from '../ToastBox';
 import authnicateByQr from '@/lib/authnicateByQr';
 
-export default function QrCodeLogin() {
+export default function QrCodeLogin({ continueUrl }: { continueUrl: string | string[] | undefined }) {
   const router = useRouter()
   const [scannerActivated, setScannerActivated] = useState(true)
   const [loginError, setLoginError] = useState(false)
 
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
-
-    const qrCodeId = decodedText.split('/').filter(Boolean).pop()
-
     try {
+      const qrCodeId = decodedText.split('/').filter(Boolean).pop()
       const result = await authnicateByQr(qrCodeId);
       setScannerActivated(false);
       document.cookie = `qrCodeId=${qrCodeId}; path=/`;
-      window.location.reload()
 
     } catch (error) {
-
       // Handle any errors from authnicateByQr here
       setLoginError(true);
-
     }
 
+    const redirectUrl = continueUrl?.toString()
+    if (Boolean(redirectUrl) && redirectUrl != undefined) {
+      redirect(redirectUrl)
+    } else {
+      redirect("/dashboard")
+    }
   };
 
   if (scannerActivated === true) {

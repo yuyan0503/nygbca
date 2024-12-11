@@ -16,10 +16,16 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
     const result = await authnicateByQr(qrCodeId);
     const cookieStore = await cookies()
     cookieStore.set('qrCodeId', qrCodeId)
-    redirect("/dashboard")
 
   } catch (error) {
     // Handle any errors from authnicateByQr here
     return console.error(error)
+  }
+
+  const continueUrl = formData.get('continueUrl')?.toString();
+  if (Boolean(continueUrl) && continueUrl != undefined) {
+    redirect(continueUrl)
+  } else {
+    redirect("/dashboard")
   }
 }

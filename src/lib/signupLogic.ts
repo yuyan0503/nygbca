@@ -15,19 +15,14 @@ import { NoQrCodeIdInCookieError } from "./errors/errorclasses";
 export default async function signupLogic(formData: FormData) {
   try {
     const cookieStore = await cookies()
-    const qrCodeIdCookie = cookieStore.get('qrCodeId')
 
-    if (!qrCodeIdCookie) {
-      // If the cookie is not found, return children
-      throw new NoQrCodeIdInCookieError
-    }
-    const qrCodeId = qrCodeIdCookie.value
+    const qrCodeId = formData.get('qrCodeId')?.toString()
 
     const email = formData.get('email')?.toString();
     const firstName = formData.get('firstName')?.toString();
     const lastName = formData.get('lastName')?.toString();
 
-    if (email === undefined || firstName === undefined || lastName === undefined) {
+    if (qrCodeId === undefined || email === undefined || firstName === undefined || lastName === undefined) {
       throw new Error("All fields are required.");
     }
 
@@ -40,11 +35,20 @@ export default async function signupLogic(formData: FormData) {
       },
     });
 
+    cookieStore.set('qrCodeId', qrCodeId)
+
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message);
     }
     throw new Error('An unknown error occurred.');
   }
-  redirect("/dashboard")
+
+  const continueUrl = formData.get('continueUrl')?.toString()
+  console.log(continueUrl)
+  if (Boolean(continueUrl) && continueUrl != undefined) {
+    redirect(continueUrl)
+  } else {
+    redirect("/dashboard")
+  }
 }

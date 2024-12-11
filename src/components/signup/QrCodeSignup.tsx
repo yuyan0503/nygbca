@@ -3,18 +3,25 @@
 import { useState, ReactNode } from 'react';
 import Html5QrcodePlugin from '../Html5QrcodePlugin'
 import ToastBox from '../ToastBox';
+import { useRouter } from 'next/navigation'
+import { Router } from 'next/router';
 
-export default function QrCodeSignup({ children }: { children: ReactNode }) {
+
+export default function QrCodeSignup({ continueUrl }: { continueUrl: string | string[] | undefined }) {
+  const router = useRouter()
+  let qrCodeId;
   const [scannerActivated, setScannerActivated] = useState("true")
 
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
 
-    const qrCodeId = decodedText.split('/').filter(Boolean).pop()
+    qrCodeId = decodedText.split('/').filter(Boolean).pop()
 
     try {
-      setScannerActivated("waiting");
-      document.cookie = `qrCodeId=${qrCodeId}; path=/`;
-      setScannerActivated("done");
+      if (typeof continueUrl == "string") {
+        router.push(`/login/signupform?qrcode=${qrCodeId}&continue=${continueUrl}`)
+      } else {
+        router.push(`/login/signupform?qrcode=${qrCodeId}`)
+      }
 
     } catch (error) {
       // Handle any errors from authnicateByQr here
@@ -39,7 +46,7 @@ export default function QrCodeSignup({ children }: { children: ReactNode }) {
 
     )
   } else if (scannerActivated == "done") {
-    return (<>{children}</>)
+
   } else {
     return (
       <p>please wait, processing. If it takes more than 5 seconds refresh this page.</p>

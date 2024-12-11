@@ -103,7 +103,7 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
         <hr />
         <br />
 
-        {isMaster == true ? <PrivilegedJoinIdTable groupId={groupId} /> : <a>no</a>}
+        {isMaster == true ? <PrivilegedJoinIdTable groupId={groupId} /> : <></>}
 
       </div>
     )
