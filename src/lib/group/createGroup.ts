@@ -1,5 +1,5 @@
 "use server"
-import { redirect } from 'next/navigation'
+
 import prisma from "../prisma";
 
 /**
@@ -8,7 +8,10 @@ import prisma from "../prisma";
  */
 export default async function createGroup(formData: FormData) {
   try {
-    const groupName = String(formData.get('groupName'));
+    const groupName = formData.get('groupName')?.toString();
+    if (groupName==undefined){
+      throw new Error("groupName is undefined!")
+    }
     const group = await prisma.group.create({
       data: {
         groupName,

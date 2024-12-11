@@ -1,6 +1,8 @@
 import getGroupInfo from "@/lib/group/getGroupInfo";
 import getGroupInfoFull from "@/lib/group/getGroupInfoFull";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import PrivilegedJoinIdTable from "@/components/groupJoinId/PrivilegedJoinIdTable";
 
 export default async function Page({ params }: { params: Promise<{ groupId: string }> }) {
   const parameters = await params;
@@ -10,6 +12,16 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
     const groupData = await getGroupInfo(groupId)
     const groupUserData = await getGroupInfoFull(groupId)
 
+    const cookieStore = await cookies()
+    const qrCodeIdCookie = cookieStore.get('qrCodeId')
+
+    if (!qrCodeIdCookie) {
+      // If the cookie is not found, return error
+      return (<a>a cookie error happened.</a>)
+    }
+    const qrCodeId = qrCodeIdCookie.value
+    const qrCodes = groupUserData.masters.map(item => item.qrCode);
+    const isMaster = qrCodes.includes(qrCodeId)
 
     return (
       <div className="overflow-x-auto">
@@ -36,6 +48,8 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
             ))}
           </tbody>
         </table>
+
+        <br />
         <hr />
         <br />
 
@@ -60,6 +74,7 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
           </tbody>
         </table>
 
+        <br />
         <hr />
         <br />
 
@@ -83,6 +98,13 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
             ))}
           </tbody>
         </table>
+
+        <br />
+        <hr />
+        <br />
+
+        {isMaster == true ? <PrivilegedJoinIdTable groupId={groupId} /> : <a>no</a>}
+
       </div>
     )
 

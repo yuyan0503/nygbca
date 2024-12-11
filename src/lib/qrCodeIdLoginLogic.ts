@@ -8,7 +8,10 @@ import authnicateByQr from '@/lib/authnicateByQr';
 
 export default async function QrCodeIdLoginLogic(formData: FormData) {
   try {
-    const qrCodeId = String(formData.get('qrCodeId'));
+    const qrCodeId = formData.get('qrCodeId')?.toString();
+    if (qrCodeId == undefined) {
+      throw new Error("qrCodeId is undefined!")
+    }
     // Use formData.get() to retrieve the value
     const result = await authnicateByQr(qrCodeId);
     const cookieStore = await cookies()

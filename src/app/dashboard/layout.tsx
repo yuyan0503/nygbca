@@ -23,14 +23,14 @@ export default async function Layout({ children }: { children: ReactNode }) {
     return (
       <LoginFormChooser />
     )
-
   }
 
   return (
     <>
       <NavBar />
-      {children}
+      <div className="container mx-auto px-4">
+        {children}
+      </div>
     </>
-
   )
 }
