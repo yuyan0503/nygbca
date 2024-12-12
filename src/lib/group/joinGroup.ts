@@ -1,7 +1,7 @@
 "use server"
 
-import authnicateByQr from "./authnicateByQr";
-import prisma from "./prisma";
+import authnicateByQr from "../authnicateByQr";
+import prisma from "../prisma";
 
 export default async function joinGroup(qrCodeId:string, updatingGroupId:number, isMaster:boolean) {
 
@@ -61,6 +61,6 @@ export default async function joinGroup(qrCodeId:string, updatingGroupId:number,
     return(updateGroup)
 
   } catch (error) {
-    console.error("joining group failed:", error);
+    return console.error("joining group failed:", error);
   }
 }

@@ -1,7 +1,13 @@
 "use server"
 
-import prisma from "./prisma"
+import prisma from "../prisma"
 
+/**
+ * 
+ * @param groupId 
+ * @returns full group info, including masters and slaves
+ * @throws new Error if group was not found, etc. 
+ */
 export default async function getGroupInfoFull(groupId: number) {
   try {
     const findGroupId = groupId

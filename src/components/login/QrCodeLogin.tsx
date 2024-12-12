@@ -1,38 +1,65 @@
 "use client"
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import Link from "next/link";
 import Html5QrcodePlugin from '../Html5QrcodePlugin';
 import ToastBox from '../ToastBox';
 import authnicateByQr from '@/lib/authnicateByQr';
 
-export default function QrCodeLogin() {
+export default function QrCodeLogin({ continueUrl }: { continueUrl: string | string[] | undefined }) {
   const router = useRouter()
   const [scannerActivated, setScannerActivated] = useState(true)
   const [loginError, setLoginError] = useState(false)
 
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
-
-    const qrCodeId = decodedText.split('/').filter(Boolean).pop()
-
     try {
+      const qrCodeId = decodedText.split('/').filter(Boolean).pop()
       const result = await authnicateByQr(qrCodeId);
       setScannerActivated(false);
       document.cookie = `qrCodeId=${qrCodeId}; path=/`;
-      window.location.reload()
 
     } catch (error) {
-
       // Handle any errors from authnicateByQr here
       setLoginError(true);
-
     }
 
+    const redirectUrl = continueUrl?.toString()
+    if (Boolean(redirectUrl) && redirectUrl != undefined) {
+      redirect(redirectUrl)
+    } else {
+      redirect("/dashboard")
+    }
   };
+
+  function returnAction() {
+    setScannerActivated(false);
+    let returnUrl = continueUrl?.toString()
+    if (Boolean(returnUrl) && returnUrl != undefined) {
+      returnUrl = `?continue=${returnUrl}`
+    } else {
+      returnUrl = ""
+    }
+    redirect(`/login${returnUrl}`)
+  }
 
   if (scannerActivated === true) {
     return (
-      <>
+      <div className="relative">
+        <button className="btn btn-square top-2 left-2 z-10 fixed" onClick={returnAction}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
         <Html5QrcodePlugin
           fps={10}
           qrbox={250}
@@ -43,8 +70,9 @@ export default function QrCodeLogin() {
         <div className="toast toast-end">
           {loginError === true ? <ToastBox message="error logging in" color={"info"} /> : null}
           <ToastBox message="To continue, you must log in using QR code." color={"info"} />
+          <ToastBox message="If an UI error occurs, refresh this page." color={"info"} />
         </div>
-      </>
+      </div>
 
     )
   } else {

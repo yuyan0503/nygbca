@@ -1,6 +1,12 @@
 import authnicateByQr from "./authnicateByQr";
 import prisma from "./prisma";
 
+/**
+ * 
+ * @param qrCodeId 
+ * @returns user object, including masterGroup and slaveGroup
+ * @throws new Error if user is not found, etc.
+ */
 export default async function getAllGroupOfUuser(qrCodeId: string) {
   try {
     const user = await prisma.user.findUniqueOrThrow({

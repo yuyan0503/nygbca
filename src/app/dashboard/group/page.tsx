@@ -5,7 +5,12 @@ import Link from "next/link"
 
 export default async function Page() {
   const cookieStore = await cookies()
-  const qrCodeId = cookieStore.get('qrCodeId').value
+  const qrCodeId = cookieStore.get('qrCodeId')?.value
+  if (qrCodeId == undefined) {
+    return (
+      <a>a cookie error occured.Please log out and sign in again.</a>
+    )
+  }
   const user = await getAllGroupOfUuser(qrCodeId)
   const masterGroup = user.masterGroup
   const slaveGroup = user.slaveGroup
@@ -17,7 +22,12 @@ export default async function Page() {
           <Link role="button" className="btn" href="/dashboard">home</Link>
         </div>
         <div className="flex justify-end">
-          <Link role="button" className="btn" href="/dashboard/group/create">create group</Link>
+          <div className="px-2">
+            <Link role="button" className="btn" href="/dashboard/group/join">join group</Link>
+          </div>
+          <div className="px-2">
+            <Link role="button" className="btn" href="/dashboard/group/create">create group</Link>
+          </div>
         </div>
       </div>
       <table className="table">

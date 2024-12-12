@@ -1,4 +1,4 @@
-import QrCodeSignup from "@/components/signup/QrCodeSignup"
+import QrCodeLogin from "@/components/login/QrCodeLogin";
 
 export default async function Page({
   searchParams,
@@ -7,7 +7,6 @@ export default async function Page({
 }) {
   const continueUrl = (await searchParams).continue
   return (
-    <QrCodeSignup continueUrl={continueUrl} />
-
+    <QrCodeLogin continueUrl={continueUrl} />
   )
 }

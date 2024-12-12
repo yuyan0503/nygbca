@@ -36,6 +36,7 @@ model Group {
 
 model GroupJoinId {
   joinId         Int      @id @default(autoincrement())
+  joinName       String   @unique
   isMaster       Boolean  @default(false)
   maxUse         Int      @default(255)
   currentUse     Int      @default(0)

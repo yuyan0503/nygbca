@@ -33,8 +33,11 @@ export default async function Page() {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(userData).map((id) => (
-              <tr key={id}><td>{id}</td><td>{userData[id].toString()}</td></tr>
+            {Object.entries(userData).map(([id, value]) => (
+              <tr key={id}>
+                <td>{id}</td>
+                <td>{value.toString()}</td>
+              </tr>
             ))}
           </tbody>
         </table>
