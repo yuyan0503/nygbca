@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Page() {
   return (
-    <div>
+    <>
       <NavBar />
       <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center">
         <div className="prose">
@@ -17,6 +17,6 @@ export default function Page() {
         <Link className="btn btn-neutral mb-2 w-full" href={`/dashboard`}>back to dashboard</Link>
         <LogoutButton width={true} />
       </div>
-    </div>
+    </>
   )
 }

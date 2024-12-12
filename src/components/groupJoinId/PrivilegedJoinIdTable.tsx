@@ -8,7 +8,7 @@ export default async function PrivilegedJoinIdTable({ groupId }: { groupId: numb
 
   const joinIdData = await getGroupJoinId(groupId)
   return (
-    <div>
+    <>
       <div className="overflow-x-auto">
         <div className="flex justify-end">
           <Link className="btn" href={`/dashboard/group/${groupId}/cgjid`}>create groupJoinId</Link>
@@ -40,6 +40,6 @@ export default async function PrivilegedJoinIdTable({ groupId }: { groupId: numb
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   )
 }

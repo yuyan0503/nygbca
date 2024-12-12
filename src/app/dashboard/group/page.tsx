@@ -1,3 +1,4 @@
+import CookieErrorUI from "@/components/CookieErrorUI"
 import getAllGroupOfUuser from "@/lib/user/getAllGroupOfUser"
 import { cookies } from "next/headers"
 import Link from "next/link"
@@ -8,7 +9,7 @@ export default async function Page() {
   const qrCodeId = cookieStore.get('qrCodeId')?.value
   if (qrCodeId == undefined) {
     return (
-      <a>a cookie error occured.Please log out and sign in again.</a>
+      <CookieErrorUI />
     )
   }
   const user = await getAllGroupOfUuser(qrCodeId)

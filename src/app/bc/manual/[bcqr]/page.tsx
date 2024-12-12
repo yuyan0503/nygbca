@@ -82,14 +82,12 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
     }
   } catch (err) {
     return (
-      <div>
-        <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
-          <div className="prose">
-            <h1 className="mb-4 text-center">Error</h1>
-          </div>
-          <p className="mb-2">an error occured</p>
-          <Link className="btn btn-primary mb-4 w-full" href="./">cancel</Link>
+      <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
+        <div className="prose">
+          <h1 className="mb-4 text-center">Error</h1>
         </div>
+        <p className="mb-2">an error occured</p>
+        <Link className="btn btn-primary mb-4 w-full" href="./">cancel</Link>
       </div>
     )
   }

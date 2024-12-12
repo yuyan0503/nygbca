@@ -3,6 +3,7 @@ import getGroupInfoFull from "@/lib/group/getGroupInfoFull";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import PrivilegedJoinIdTable from "@/components/groupJoinId/PrivilegedJoinIdTable";
+import CookieErrorUI from "@/components/CookieErrorUI";
 
 export default async function Page({ params }: { params: Promise<{ groupId: string }> }) {
   const parameters = await params;
@@ -17,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
 
     if (!qrCodeIdCookie) {
       // If the cookie is not found, return error
-      return (<a>a cookie error happened.</a>)
+      return (<CookieErrorUI />)
     }
     const qrCodeId = qrCodeIdCookie.value
     const qrCodes = groupUserData.masters.map(item => item.qrCode);
