@@ -1,4 +1,4 @@
-import getAllGroupOfUuser from "@/lib/getAllGroupOfUser"
+import getAllGroupOfUuser from "@/lib/user/getAllGroupOfUser"
 import { cookies } from "next/headers"
 import Link from "next/link"
 

@@ -1,6 +1,6 @@
 "use server"
 
-import authnicateByQr from "@/lib/authnicateByQr";
+import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId";
 import Link from "next/link";
 import Form from "next/form";
 import checkIfUserInside from "@/lib/bc/checkIfUserInside";
@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
   const parameters = await params;
   try {
     const qrCodeId = parameters.bcqr
-    const result = await authnicateByQr(qrCodeId)
+    const result = await getUserDataWithQrCodeId(qrCodeId)
     const isInside = await checkIfUserInside(qrCodeId)
     const borderCrossCount = result.borderCrossCount
     const updatedBorderCrossCount = borderCrossCount + 1

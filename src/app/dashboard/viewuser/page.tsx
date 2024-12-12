@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import Link from 'next/link'
 
-import authnicateByQr from "@/lib/authnicateByQr"
+import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId"
 
 export default async function Page() {
 
@@ -14,7 +14,7 @@ export default async function Page() {
       return (<a>{"error: qrCodeId not found in browser cookie"}</a>)
     }
     const qrCodeId = qrCodeIdCookie.value
-    const userData = await authnicateByQr(qrCodeId)
+    const userData = await getUserDataWithQrCodeId(qrCodeId)
 
     return (
       <div className="overflow-x-auto">

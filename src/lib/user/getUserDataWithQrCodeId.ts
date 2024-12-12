@@ -1,8 +1,8 @@
 "use server"
 
-import prisma from "./prisma";
+import prisma from "../prisma";
 
-import { AuthnicationError } from "./errors/errorclasses";
+import { AuthnicationError } from "../errors/errorclasses";
 
 /**
  * Checks if the provided qrCodeId is valid and returns 
@@ -12,7 +12,7 @@ import { AuthnicationError } from "./errors/errorclasses";
  * @returns The user object associated with the specified qrCodeId.
  * @throws {@link AuthenticationError} - Thrown when the user is not found.
  */
-export default async function authnicateByQr(qrCodeId: string) {
+export default async function getUserDataWithQrCodeId(qrCodeId: string) {
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {

@@ -1,8 +1,8 @@
-import authnicateByQr from "../authnicateByQr";
+import getUserDataWithQrCodeId from "../user/getUserDataWithQrCodeId";
 
 export default async function checkIfUserInside(qrCodeId: string) {
   try {
-    const userData = await authnicateByQr(qrCodeId)
+    const userData = await getUserDataWithQrCodeId(qrCodeId)
     if (userData.borderCrossCount % 2 === 0) {
       return false
     } else {

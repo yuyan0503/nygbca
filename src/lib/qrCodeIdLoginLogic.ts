@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 
 
-import authnicateByQr from '@/lib/authnicateByQr';
+import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
 import doesQrCodeIdExist from './doesQrCodeIdExist';
 
 export default async function QrCodeIdLoginLogic(formData: FormData) {
@@ -24,7 +24,7 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
     }
 
   } catch (error) {
-    // Handle any errors from authnicateByQr here
+    // Handle any errors from getUserDataWithQrCodeId here
     return console.error(error)
   }
 

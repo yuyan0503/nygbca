@@ -1,4 +1,3 @@
-import authnicateByQr from '@/lib/authnicateByQr'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { ReactNode } from 'react'
@@ -28,7 +27,6 @@ export default async function Layout({ children }: { children: ReactNode }) {
         </div>
       )
     }
-
   } catch (err) {
     return (
       <div className="container mx-auto px-4">

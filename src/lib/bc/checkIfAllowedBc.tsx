@@ -1,4 +1,4 @@
-import getAllGroupOfUuser from "../getAllGroupOfUser";
+import getAllGroupOfUuser from "../user/getAllGroupOfUser";
 
 export default async function checkIfAllowedBc(qrCodeId: string) {
   try{

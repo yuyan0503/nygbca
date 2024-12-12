@@ -1,10 +1,8 @@
 "use server"
+
 import prisma from "./prisma";
-
 import { redirect } from 'next/navigation'
-
 import { cookies } from 'next/headers'
-import { NoQrCodeIdInCookieError } from "./errors/errorclasses";
 
 /**
  * 
@@ -15,9 +13,7 @@ import { NoQrCodeIdInCookieError } from "./errors/errorclasses";
 export default async function signupLogic(formData: FormData) {
   try {
     const cookieStore = await cookies()
-
     const qrCodeId = formData.get('qrCodeId')?.toString()
-
     const email = formData.get('email')?.toString();
     const firstName = formData.get('firstName')?.toString();
     const lastName = formData.get('lastName')?.toString();

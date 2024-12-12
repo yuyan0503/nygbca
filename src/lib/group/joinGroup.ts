@@ -1,6 +1,6 @@
 "use server"
 
-import authnicateByQr from "../authnicateByQr";
+import getUserDataWithQrCodeId from "../user/getUserDataWithQrCodeId";
 import prisma from "../prisma";
 
 export default async function joinGroup(qrCodeId:string, updatingGroupId:number, isMaster:boolean) {
@@ -9,7 +9,7 @@ export default async function joinGroup(qrCodeId:string, updatingGroupId:number,
 
   try {
     const groupId = updatingGroupId
-    const user = await authnicateByQr(qrCodeId)
+    const user = await getUserDataWithQrCodeId(qrCodeId)
     const userId = user.userId
     if (isMaster == true) {
       updateGroup = await prisma.group.update({

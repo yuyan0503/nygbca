@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Html5QrcodePlugin from '@/components/Html5QrcodePlugin';
-import authnicateByQr from '@/lib/authnicateByQr';
+import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
 import checkIfUserInside from '@/lib/bc/checkIfUserInside';
 import updateCountOfQrCodeId from '@/lib/bc/updateCountOfQrCodeId';
 
@@ -17,7 +17,7 @@ export default function Page() {
     setProgramState("error")
     try {
       const qrCodeId = decodedText.split('/').filter(Boolean).pop()
-      const result = await authnicateByQr(qrCodeId);
+      const result = await getUserDataWithQrCodeId(qrCodeId);
       const isInside = await checkIfUserInside(qrCodeId)
       if (isInside) {
         throw new Error("already inside!")
