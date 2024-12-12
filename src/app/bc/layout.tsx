@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { cookies } from "next/headers";
 import Link from 'next/link'
-import NavBar from '@/components/NavBar'
+import NavBar from '@/components/navbar/NavBar'
 import checkIfAllowedBc from '@/lib/bc/checkIfAllowedBc'
 
 

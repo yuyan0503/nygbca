@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import NavBar from '@/components/NavBar'
+import NavBar from '@/components/navbar/NavBar'
 
 export default async function Layout({ children }: { children: ReactNode }) {
   return (

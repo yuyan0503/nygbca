@@ -22,8 +22,8 @@ export default async function Page({
               <input type="text" name="qrCodeId" placeholder="qrCodeId" className="input input-bordered w-full" required />
             </label>
           </div>
-          <button className="btn btn-primary mb-4 w-full" type="submit">Submit</button>
-          <Link className="btn btn-neutral mb-4 w-full" href="/login">other login options</Link>
+          <button className="btn btn-primary mb-2 w-full" type="submit">Submit</button>
+          <Link className="btn btn-neutral mb-2 w-full" href="/login">other login options</Link>
         </Form>
       </div>
 

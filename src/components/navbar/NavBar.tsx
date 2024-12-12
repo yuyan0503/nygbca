@@ -1,6 +1,5 @@
-"use client"
-
 import Link from 'next/link'
+import LogoutButton from './LogoutButton';
 
 function logout() {
   document.cookie = "qrCodeId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -40,7 +39,7 @@ export default function NavBar() {
         <Link className="btn btn-ghost text-xl" href="/dashboard">39thCulture</Link>
       </div>
       <div className="navbar-end">
-        <button className="btn" onClick={() => logout()}>Logout</button>
+        <LogoutButton width={false} />
       </div>
     </div>
   )
