@@ -2,6 +2,7 @@ import authnicateByQr from '@/lib/authnicateByQr'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { ReactNode } from 'react'
+import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist'
 
 export default async function Layout({ children }: { children: ReactNode }) {
   try {
@@ -16,9 +17,18 @@ export default async function Layout({ children }: { children: ReactNode }) {
         </div>
       )
     }
-
     const qrCodeId = qrCodeIdCookie.value
-    const userInfo = await authnicateByQr(qrCodeId)
+    const isQrCodeLegit = doesQrCodeIdExist(qrCodeId)
+
+    if (!isQrCodeLegit) {
+      // If the cookie is wrong, return children
+      return (
+        <div className="container mx-auto px-4">
+          {children}
+        </div>
+      )
+    }
+
   } catch (err) {
     return (
       <div className="container mx-auto px-4">

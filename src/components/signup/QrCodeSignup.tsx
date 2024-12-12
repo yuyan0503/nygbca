@@ -25,7 +25,7 @@ export default function QrCodeSignup({ continueUrl }: { continueUrl: string | st
       }
 
     } catch (error) {
-      // Handle any errors from authnicateByQr here
+      // Handle any errors here
       console.error(error)
     }
   };

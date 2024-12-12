@@ -1,4 +1,3 @@
-import authnicateByQr from "./authnicateByQr";
 import prisma from "./prisma";
 
 /**

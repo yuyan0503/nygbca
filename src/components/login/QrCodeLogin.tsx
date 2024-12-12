@@ -5,7 +5,7 @@ import { redirect, useRouter } from 'next/navigation'
 import Link from "next/link";
 import Html5QrcodePlugin from '../Html5QrcodePlugin';
 import ToastBox from '../ToastBox';
-import authnicateByQr from '@/lib/authnicateByQr';
+import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
 
 export default function QrCodeLogin({ continueUrl }: { continueUrl: string | string[] | undefined }) {
   const router = useRouter()
@@ -15,16 +15,20 @@ export default function QrCodeLogin({ continueUrl }: { continueUrl: string | str
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
     try {
       const qrCodeId = decodedText.split('/').filter(Boolean).pop()
-      const result = await authnicateByQr(qrCodeId);
-      setScannerActivated(false);
-      document.cookie = `qrCodeId=${qrCodeId}; path=/`;
+      const isQrCodeLegit = await doesQrCodeIdExist(qrCodeId);
 
+      if (isQrCodeLegit) {
+        setScannerActivated(false);
+        document.cookie = `qrCodeId=${qrCodeId}; path=/`;
+      } else {
+        setLoginError(true)
+      }
     } catch (error) {
-      // Handle any errors from authnicateByQr here
+      // Handle any errors here
       setLoginError(true);
     }
-
     const redirectUrl = continueUrl?.toString()
+
     if (Boolean(redirectUrl) && redirectUrl != undefined) {
       redirect(redirectUrl)
     } else {
@@ -73,7 +77,6 @@ export default function QrCodeLogin({ continueUrl }: { continueUrl: string | str
           <ToastBox message="If an UI error occurs, refresh this page." color={"info"} />
         </div>
       </div>
-
     )
   } else {
     return (

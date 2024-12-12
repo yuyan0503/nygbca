@@ -1,21 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import authnicateByQr from './lib/authnicateByQr';
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
+
   // Check if the qrCodeId cookie exists
-  const qrCodeId = request.cookies.get('qrCodeId');
+  const hasQrCodeId = request.cookies.has('qrCodeId');
 
   // If the cookie is not present, redirect to the login page
-  if (!qrCodeId) {
-    const currentPath = request.nextUrl.pathname; // Get the current path
-    const redirectUrl = new URL(`/login?continue=${currentPath}`, request.url); // Construct the redirect URL
-    return NextResponse.redirect(redirectUrl); // Perform the redirect
-  }
-
-  try {
-    authnicateByQr(qrCodeId.toString())
-  } catch (err) {
+  if (!hasQrCodeId) {
     const currentPath = request.nextUrl.pathname; // Get the current path
     const redirectUrl = new URL(`/login?continue=${currentPath}`, request.url); // Construct the redirect URL
     return NextResponse.redirect(redirectUrl); // Perform the redirect
