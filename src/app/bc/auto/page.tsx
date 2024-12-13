@@ -1,5 +1,5 @@
-import LogoutButton from '@/components/navbar/LogoutButton'
-import NavBar from '@/components/navbar/NavBar'
+import LogoutButton from '@/components/LogoutButton'
+import NavBar from '@/components/NavBar'
 import Link from 'next/link'
 
 export default function Page() {

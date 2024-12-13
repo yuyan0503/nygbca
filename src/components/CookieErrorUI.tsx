@@ -1,4 +1,4 @@
-import LogoutButton from "./navbar/LogoutButton";
+import LogoutButton from "./LogoutButton";
 
 export default function CookieErrorUI() {
   return (

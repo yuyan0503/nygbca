@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from 'next/link'
 import checkIfAllowedBc from "@/lib/bc/checkIfAllowedBc"
-import LogoutButton from "@/components/navbar/LogoutButton";
+import LogoutButton from "@/components/LogoutButton";
 import CookieErrorUI from "@/components/CookieErrorUI";
 
 export default async function Page() {

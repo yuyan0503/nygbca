@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import NavBar from '@/components/navbar/NavBar'
+import NavBar from '@/components/NavBar'
 import { cookies } from 'next/headers'
 import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist'
 import CookieErrorUI from '@/components/CookieErrorUI'
