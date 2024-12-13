@@ -7,6 +7,7 @@ import { NoQrCodeIdInCookieError } from "../errors/errorclasses";
 
 
 export default async function createNewGroupFlow(formData: FormData) {
+  let newGroup: number;
 
   try {
     const cookieStore = await cookies()
@@ -18,12 +19,18 @@ export default async function createNewGroupFlow(formData: FormData) {
     const qrCodeId = qrCodeIdCookie.value
     const group = await createGroup(formData);
 
-    await joinGroup(qrCodeId, group.groupId, true)
-    return redirect(`/dashboard/group/${group.groupId.toString()}`);
+    newGroup = group.groupId;
+
+    await joinGroup(qrCodeId, newGroup, true)
   }
 
   catch (error) {
-    return console.error(error)
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    } else {
+      throw new Error("an unknown error happened")
+    }
   }
 
+  return redirect(`/dashboard/group/${newGroup.toString()}`);
 }
