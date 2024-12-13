@@ -22,14 +22,14 @@ export default async function Layout({ children }: { children: ReactNode }) {
     if (!isQrCodeLegit) {
       // If the cookie is wrong, return children
       return (
-        <div className="container mx-auto px-4">
+        <div className="mx-auto">
           {children}
         </div>
       )
     }
   } catch (err) {
     return (
-      <div className="container mx-auto px-4">
+      <div className="mx-auto">
         {children}
       </div>
     )

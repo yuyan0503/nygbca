@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { redirect, useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
-import Html5QrcodePlugin from "@/components/Html5QrcodePlugin";
 import ToastBox from "@/components/ToastBox";
 import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
+import QrCodeScannerPlugin2 from '@/components/QrCodeScannerPlugin2';
 
 export default function Page() {
   const searchParams = useSearchParams()
@@ -50,7 +50,7 @@ export default function Page() {
 
   if (scannerActivated === true) {
     return (
-      <div className="relative">
+      <div className="relative mx-auto w-full flex flex-col items-center justify-center max-h-screen ">
         <button className="btn btn-square top-2 left-2 z-10 fixed" onClick={returnAction}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ export default function Page() {
               d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <Html5QrcodePlugin
+        <QrCodeScannerPlugin2
           fps={10}
           qrbox={250}
           disableFlip={false}

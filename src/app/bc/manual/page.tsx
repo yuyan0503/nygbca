@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import { redirect, useRouter } from 'next/navigation'
-import Link from 'next/link'
-import Html5QrcodePlugin from '@/components/Html5QrcodePlugin';
 import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
 import checkIfUserInside from '@/lib/bc/checkIfUserInside';
+import QrCodeScannerPlugin2 from '@/components/QrCodeScannerPlugin2';
 
 export default function Page() {
   const [scannerActivated, setScannerActivated] = useState(true)
@@ -46,7 +45,7 @@ export default function Page() {
               d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <Html5QrcodePlugin
+        <QrCodeScannerPlugin2
           fps={10}
           qrbox={250}
           disableFlip={false}
