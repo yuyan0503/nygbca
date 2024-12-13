@@ -7,6 +7,8 @@ import checkIfUserInside from "@/lib/bc/checkIfUserInside";
 import prisma from "@/lib/prisma";
 import { redirect } from 'next/navigation'
 import updateCount from "@/lib/bc/updateCount";
+import gt from "@/lib/lang/gt";
+import { buildCustomRoute } from "next/dist/server/lib/router-utils/filesystem";
 
 export default async function Page({ params }: { params: Promise<{ bcqr: string }> }) {
   const parameters = await params;
@@ -36,14 +38,14 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
           </Link>
           <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
             <div className="prose">
-              <h1 className="mb-4 text-center">Exit</h1>
-              <p>clicking the button below will cause the holder of this QR Code to exit.</p>
+              <h1 className="mb-4 text-center">{await gt("bc.terms.exit")}</h1>
+              <p>{await gt("bc.manualbc.exitMessage")}</p>
             </div>
             <Form action={updateCount} className="w-full">
               <input type="hidden" name="qrCodeId" value={qrCodeId} />
               <input type="hidden" name="updatedBorderCrossCount" value={updatedBorderCrossCount} />
-              <button className="btn btn-primary mb-2 w-full" type="submit">Exit</button>
-              <Link className="btn btn-neutral mb-2 w-full" href="./">cancel</Link>
+              <button className="btn btn-primary mb-2 w-full" type="submit">{await gt("bc.terms.exit")}</button>
+              <Link className="btn btn-neutral mb-2 w-full" href="./">{await gt("terms.cancel")}</Link>
             </Form>
           </div>
         </div>
@@ -67,14 +69,14 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
           </Link>
           <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
             <div className="prose">
-              <h1 className="mb-4 text-center">Enter</h1>
-              <p>clicking the button below will cause the holder of this QR Code to enter.</p>
+              <h1 className="mb-4 text-center">{await gt("bc.terms.enter")}</h1>
+              <p>{await gt("bc.manualbc.enterMessage")}</p>
             </div>
             <Form action={updateCount} className="w-full">
               <input type="hidden" name="qrCodeId" value={qrCodeId} />
               <input type="hidden" name="updatedBorderCrossCount" value={updatedBorderCrossCount} />
-              <button className="btn btn-primary mb-2 w-full" type="submit">Enter</button>
-              <Link className="btn btn-neutral mb-2 w-full" href="./">cancel</Link>
+              <button className="btn btn-primary mb-2 w-full" type="submit">{await gt("bc.terms.enter")}</button>
+              <Link className="btn btn-neutral mb-2 w-full" href="./">{await gt("terms.cancel")}</Link>
             </Form>
           </div>
         </div>
@@ -84,10 +86,10 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
     return (
       <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
         <div className="prose">
-          <h1 className="mb-4 text-center">Error</h1>
+          <h1 className="mb-4 text-center">{await gt("terms.error")}</h1>
         </div>
-        <p className="mb-2">an error occured</p>
-        <Link className="btn btn-primary mb-4 w-full" href="./">cancel</Link>
+        <p className="mb-2">{await gt("appInfo.message.anErrorOccured")}</p>
+        <Link className="btn btn-primary mb-4 w-full" href="./">{await gt("terms.error")}</Link>
       </div>
     )
   }

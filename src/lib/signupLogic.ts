@@ -32,6 +32,7 @@ export default async function signupLogic(formData: FormData) {
     });
 
     cookieStore.set('qrCodeId', qrCodeId)
+    cookieStore.set('langPref', user.preferredLanguage)
 
   } catch (err) {
     if (err instanceof Error) {

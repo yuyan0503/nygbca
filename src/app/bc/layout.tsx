@@ -5,6 +5,7 @@ import NavBar from '@/components/NavBar';
 import checkIfAllowedBc from '@/lib/bc/checkIfAllowedBc'
 import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
 import CookieErrorUI from '@/components/CookieErrorUI';
+import gt from '@/lib/lang/gt';
 
 export default async function Layout({ children }: { children: ReactNode }) {
   const cookieStore = await cookies()
@@ -32,9 +33,9 @@ export default async function Layout({ children }: { children: ReactNode }) {
           <NavBar />
           <div className="w-full flex flex-col items-center justify-center mx-auto max-w-xs">
             <div className="prose">
-              <h1 className="mb-4 text-center">Access Blocked</h1>
-              <p>You do not have permission to access this page.</p>
-              <Link className="btn btn-primary mb-4 w-full" href={`/login`}>Go back to dashboard</Link>
+              <h1 className="mb-4 text-center">{await gt("terms.accessBlocked")}</h1>
+              <p>{await gt("message.noPermission")}</p>
+              <Link className="btn btn-primary mb-4 w-full" href={`/login`}>{await gt("dashboard.phrases.backToDashboard")}</Link>
             </div>
           </div>
         </>

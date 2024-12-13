@@ -3,6 +3,7 @@ import Link from 'next/link'
 import checkIfAllowedBc from "@/lib/bc/checkIfAllowedBc"
 import LogoutButton from "@/components/LogoutButton";
 import CookieErrorUI from "@/components/CookieErrorUI";
+import gt from "@/lib/lang/gt";
 
 export default async function Page() {
   const cookieStore = await cookies()
@@ -18,13 +19,13 @@ export default async function Page() {
     <>
       <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center">
         <div className="prose">
-          <h1 className="mb-4 text-center">Welcome!</h1>
+          <h1 className="mb-4 text-center">{await gt("terms.welcome")}</h1>
         </div>
-        <p className="mb-2">Go to dashboard function</p>
-        {isAllowedBc ? <Link className="btn btn-primary mb-2 w-full" href={`/bc`}>conduct BC</Link>
+        <p className="mb-2">{await gt("dashboard.dashboardFunction")}</p>
+        {isAllowedBc ? <Link className="btn btn-primary mb-2 w-full" href={`/bc`}>{await gt("bc.terms.bc")}</Link>
           : <></>}
-        <Link className="btn btn-neutral mb-2 w-full" href={`/dashboard/group`}>Groups</Link>
-        <Link className="btn btn-neutral mb-2 w-full" href={`/dashboard/viewuser`}>view user information</Link>
+        <Link className="btn btn-neutral mb-2 w-full" href={`/dashboard/group`}>{await gt("group.groups")}</Link>
+        <Link className="btn btn-neutral mb-2 w-full" href={`/dashboard/viewuser`}>{await gt("dashboard.userInfo")}</Link>
         <LogoutButton width={true} />
       </div>
     </>

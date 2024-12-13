@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import CookieErrorUI from "@/components/CookieErrorUI";
 import getGroupJoinId from "@/lib/group/getGroupJoinId"
+import gt from "@/lib/lang/gt";
 
 async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
 
@@ -12,23 +13,23 @@ async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
     <>
       <div className="overflow-x-auto">
         <div className="flex justify-end">
-          <Link className="btn" href={`/dashboard/group/${groupId}/cgjid`}>create groupJoinId</Link>
+          <Link className="btn" href={`/dashboard/group/${groupId}/cgjid`}>{await gt("groupJoinId.generateGroupJoinId")}</Link>
         </div>
       </div>
 
       <table className="table">
-        <caption>GroupJoinIds</caption>
+        <caption>{await gt("groupJoinId.joinCode")}</caption>
         {/* head */}
         <thead>
           <tr>
             <th>joinId</th>
-            <th>joinName</th>
-            <th>isMaster</th>
-            <th>maxUse</th>
-            <th>currentUse</th>
-            <th>createdAt</th>
-            <th>updatedAt</th>
-            <th>joiningGroupId</th>
+            <th>{await gt("groupJoinId.joinCode")}</th>
+            <th>{await gt("groupJoinId.isMaster")}</th>
+            <th>{await gt("groupJoinId.maxUse")}</th>
+            <th>{await gt("groupJoinId.currentUse")}</th>
+            <th>{await gt("terms.createdAt")}</th>
+            <th>{await gt("terms.updatedAt")}</th>
+            <th>{await gt("group.groupId")}</th>
           </tr>
         </thead>
         <tbody>
@@ -68,16 +69,16 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
       <div className="overflow-x-auto">
         <div className="flex  justify-between">
           <div className="flex justify-start">
-            <Link role="button" className="btn" href="/dashboard/group">group</Link>
+            <Link role="button" className="btn" href="/dashboard/group">{await gt("group.group")}</Link>
           </div>
         </div>
         <table className="table">
-          <caption>Basic Information</caption>
+          <caption>{await gt("group.group")}</caption>
           {/* head */}
           <thead>
             <tr>
-              <th>id</th>
-              <th>value</th>
+              <th>{await gt("terms.id")}</th>
+              <th>{await gt("terms.value")}</th>
             </tr>
           </thead>
           <tbody>
@@ -95,13 +96,13 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
         <br />
 
         <table className="table">
-          <caption>masters</caption>
+          <caption>{await gt("group.masters")}</caption>
           {/* head */}
           <thead>
             <tr>
-              <th>userId</th>
-              <th>firstName</th>
-              <th>lastName</th>
+              <th>{await gt("dashboard.userId")}</th>
+              <th>{await gt("dashboard.firstName")}</th>
+              <th>{await gt("dashboard.lastName")}</th>
             </tr>
           </thead>
           <tbody>
@@ -120,13 +121,13 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
         <br />
 
         <table className="table">
-          <caption>slaves</caption>
+          <caption>{await gt("group.slaves")}</caption>
           {/* head */}
           <thead>
             <tr>
-              <th>userId</th>
-              <th>firstName</th>
-              <th>lastName</th>
+              <th>{await gt("dashboard.userId")}</th>
+              <th>{await gt("dashboard.firstName")}</th>
+              <th>{await gt("dashboard.lastName")}</th>
             </tr>
           </thead>
           <tbody>
@@ -151,6 +152,6 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
 
 
   } catch (error) {
-    return (<a>{`error: ${error}`}</a>)
+    return (<a>{`${await gt("terms.error")}: ${error}`}</a>)
   }
 }

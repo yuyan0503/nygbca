@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId"
 import ChangeLangButton from '@/components/ChangeLangButton'
+import gt from '@/lib/lang/gt'
 
 export default async function Page() {
 
@@ -21,19 +22,19 @@ export default async function Page() {
       <div className="overflow-x-auto">
         <div className="flex  justify-between">
           <div className="flex justify-start">
-            <Link role="button" className="btn" href="/dashboard">home</Link>
+            <Link role="button" className="btn" href="/dashboard">{await gt("dashboard.phrases.backToDashboard")}</Link>
           </div>
           <div className="flex justify-end">
             <ChangeLangButton qrCodeId={qrCodeId} width={false} />
           </div>
         </div>
         <table className="table">
-          <caption>userInfo</caption>
+          <caption>{await gt("dashboard.userInfo")}</caption>
           {/* head */}
           <thead>
             <tr>
-              <th>id</th>
-              <th>value</th>
+              <th>{await gt("terms.id")}</th>
+              <th>{await gt("terms.value")}</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +50,7 @@ export default async function Page() {
     )
 
   } catch (error) {
-    return (<a>{`error: ${error}`}</a>)
+    return (<a>{`${await gt("terms.error")}: ${error}`}</a>)
   }
 }
 

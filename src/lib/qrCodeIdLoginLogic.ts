@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 
 import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
 import doesQrCodeIdExist from './doesQrCodeIdExist';
+import getLangPrefByQrCodeId from './lang/getLangPrefByQrCodeId';
 
 export default async function QrCodeIdLoginLogic(formData: FormData) {
   try {
@@ -17,8 +18,12 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
 
     const isQrCodeLegit = await doesQrCodeIdExist(qrCodeId)
     if (isQrCodeLegit) {
+      const langPref = await getLangPrefByQrCodeId(qrCodeId)
       const cookieStore = await cookies()
       cookieStore.set('qrCodeId', qrCodeId)
+      if (langPref) {
+        cookieStore.set("langPref", langPref)
+      }
     } else {
       throw new Error("qrCode does not exist!")
     }

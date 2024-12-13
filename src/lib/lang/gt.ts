@@ -9,19 +9,8 @@ export default async function gt(key: string) {
   const langPrefCookie = cookieStore.get('langPref')
   let langPref = "en"
 
-  if (!langPrefCookie) {
-    // If the langPrefcookie is not found
-    const qrCodeIdCookie = cookieStore.get("qrCodeId")
-
-    if (qrCodeIdCookie) {
-      const qrCodeId = qrCodeIdCookie.value
-      const getLangPref = await getLangPrefByQrCodeId(qrCodeId)
-
-      if (typeof getLangPref == "string") {
-        langPref = getLangPref
-        cookieStore.set("langPref", langPref)
-      }
-    }
+  if (langPrefCookie) {
+    langPref = langPrefCookie.value
   }
 
   const keyParts = key.split('.');

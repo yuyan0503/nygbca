@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import LogoutButton from './LogoutButton';
+import gt from '@/lib/lang/gt';
 
 function logout() {
   document.cookie = "qrCodeId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location.reload();
 }
 
-export default function NavBar() {
+export default async function NavBar() {
 
   return (
     <div className="navbar bg-base-100">
@@ -29,14 +30,14 @@ export default function NavBar() {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li><Link href="/dashboard">Home</Link></li>
-            <li><Link href="/dashboard/group">Group</Link></li>
-            <li><Link href="/dashboard/viewuser">ViewUser</Link></li>
+            <li><Link href="/dashboard">{await gt("dashboard.dashboard")}</Link></li>
+            <li><Link href="/dashboard/group">{await gt("group.groups")}</Link></li>
+            <li><Link href="/dashboard/viewuser">{await gt("dashboard.userInfo")}</Link></li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <Link className="btn btn-ghost text-xl" href="/dashboard">39thCulture</Link>
+        <Link className="btn btn-ghost text-xl" href="/dashboard">{await gt("appInfo.appName")}</Link>
       </div>
       <div className="navbar-end">
         <LogoutButton width={false} />

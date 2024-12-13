@@ -2,6 +2,7 @@ import CookieErrorUI from "@/components/CookieErrorUI"
 import getAllGroupOfUuser from "@/lib/user/getAllGroupOfUser"
 import { cookies } from "next/headers"
 import Link from "next/link"
+import gt from "@/lib/lang/gt"
 
 
 export default async function Page() {
@@ -20,28 +21,28 @@ export default async function Page() {
     <div className="overflow-x-auto">
       <div className="flex  justify-between">
         <div className="flex justify-start">
-          <Link role="button" className="btn" href="/dashboard">home</Link>
+          <Link role="button" className="btn" href="/dashboard">{await gt("dashboard.phrases.backToDashboard")}</Link>
         </div>
         <div className="flex justify-end">
           <div className="px-2">
-            <Link role="button" className="btn" href="/dashboard/group/join">join group</Link>
+            <Link role="button" className="btn" href="/dashboard/group/join">{await gt("group.joinGroup")}</Link>
           </div>
           <div className="px-2">
-            <Link role="button" className="btn" href="/dashboard/group/create">create group</Link>
+            <Link role="button" className="btn" href="/dashboard/group/create">{await gt("group.createGroup")}</Link>
           </div>
         </div>
       </div>
       <table className="table">
-        <caption>masterGroup</caption>
+        <caption>{await gt("group.masterGroup")}</caption>
 
         {/* head */}
         <thead>
           <tr>
-            <th>groupId</th>
-            <th>groupName</th>
-            <th>isAllowedBorderControl</th>
-            <th>createdAt</th>
-            <th>updatedAt</th>
+            <th>{await gt("group.groupId")}</th>
+            <th>{await gt("group.groupName")}</th>
+            <th>{await gt("bc.terms.bc")}</th>
+            <th>{await gt("terms.createdAt")}</th>
+            <th>{await gt("terms.updatedAt")}</th>
           </tr>
         </thead>
         <tbody>
@@ -59,16 +60,16 @@ export default async function Page() {
       <hr />
       <br />
       <table className="table">
-        <caption>slaveGroup</caption>
+        <caption>{await gt("group.slaveGroup")}</caption>
 
         {/* head */}
         <thead>
           <tr>
-            <th>groupId</th>
-            <th>groupName</th>
-            <th>isAllowedBorderControl</th>
-            <th>createdAt</th>
-            <th>updatedAt</th>
+            <th>{await gt("group.groupId")}</th>
+            <th>{await gt("group.groupName")}</th>
+            <th>{await gt("bc.terms.bc")}</th>
+            <th>{await gt("terms.createdAt")}</th>
+            <th>{await gt("terms.updatedAt")}</th>
           </tr>
         </thead>
         <tbody>
@@ -85,6 +86,5 @@ export default async function Page() {
       </table>
     </div>
   )
-
 }
 
