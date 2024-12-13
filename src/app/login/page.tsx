@@ -1,3 +1,4 @@
+import gt from '@/lib/lang/gt';
 import Link from 'next/link'
 
 export default async function Page({
@@ -13,7 +14,7 @@ export default async function Page({
   return (
     <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
       <div className="prose">
-        <h1 className="mb-4 text-center">Welcome to nygbca</h1>
+        <h1 className="mb-4 text-center">{await gt("appInfo.appGreetings")}</h1>
       </div>
       <Link className="btn btn-primary mb-4 w-full" href={`/login/scanqr${continueUrlFragment}`}>log in by scanning Qr Code</Link>
       <p className="mb-2">not working?</p>

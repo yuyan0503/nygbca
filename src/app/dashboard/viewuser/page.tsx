@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 
 import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId"
+import ChangeLangButton from '@/components/ChangeLangButton'
 
 export default async function Page() {
 
@@ -21,6 +22,9 @@ export default async function Page() {
         <div className="flex  justify-between">
           <div className="flex justify-start">
             <Link role="button" className="btn" href="/dashboard">home</Link>
+          </div>
+          <div className="flex justify-end">
+            <ChangeLangButton qrCodeId={qrCodeId} width={false} />
           </div>
         </div>
         <table className="table">

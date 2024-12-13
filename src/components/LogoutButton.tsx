@@ -9,6 +9,7 @@ export default function LogoutButton({ width }: { width: boolean }) {
 
   function logout() {
     document.cookie = "qrCodeId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "langPref=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload();
   }
 
