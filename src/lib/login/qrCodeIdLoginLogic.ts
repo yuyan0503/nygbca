@@ -27,7 +27,12 @@ export default async function QrCodeIdLoginLogic(formData: FormData) {
 
   } catch (error) {
     // Handle any errors from getUserDataWithQrCodeId here
-    return console.error(error)
+    const continueUrl = formData.get('continueUrl')?.toString();
+    if (Boolean(continueUrl) && continueUrl != undefined) {
+      redirect(`/login/loginform?continue=${continueUrl}&status=loginerror`)
+    } else {
+      redirect("/login/loginform?status=loginerror")
+    }
   }
 
   const continueUrl = formData.get('continueUrl')?.toString();
