@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Form from 'next/form'
-import QrCodeIdLoginLogic from '@/lib/qrCodeIdLoginLogic';
-
+import QrCodeIdLoginLogic from '@/lib/login/qrCodeIdLoginLogic';
 export default async function Page({
   searchParams,
 }: {

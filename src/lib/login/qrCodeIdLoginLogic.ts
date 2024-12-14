@@ -1,12 +1,9 @@
 "use server"
+
 import { redirect } from 'next/navigation'
-
 import { cookies } from 'next/headers'
-
-
-import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
-import doesQrCodeIdExist from './doesQrCodeIdExist';
-import getLangPrefByQrCodeId from './lang/getLangPrefByQrCodeId';
+import doesQrCodeIdExist from '../doesQrCodeIdExist';
+import getLangPrefByQrCodeId from '../lang/getLangPrefByQrCodeId';
 
 export default async function QrCodeIdLoginLogic(formData: FormData) {
   try {

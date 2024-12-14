@@ -14,13 +14,14 @@ export default async function Page({
   return (
     <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
       <div className="prose">
-        <h1 className="mb-4 text-center">{await gt("appInfo.appGreetings")}</h1>
+        <h1 className="mb-4 text-center">Welcome to SportsFes</h1>
       </div>
-      <Link className="btn btn-primary mb-4 w-full" href={`/login/scanqr${continueUrlFragment}`}>log in by scanning Qr Code</Link>
-      <p className="mb-2">not working?</p>
-      <Link className="btn btn-neutral mb-4 w-full" href={`/login/loginform${continueUrlFragment}`}>log in by entering Qr Code Id </Link>
+      <Link className="btn btn-primary mb-2 w-full" href={`/login/scanqr${continueUrlFragment}`}>log in by scanning Qr Code</Link>
+      <Link className="btn btn-neutral mb-2 w-full" href={`/login/loginform${continueUrlFragment}`}>log in by entering Qr Code Id </Link>
+      <hr className="mb-4 w-full" />
       <p className="mb-2">Don't have an account?</p>
       <Link className="btn btn-neutral mb-2 w-full" href={`/login/signup${continueUrlFragment}`}>sign up by scanning Qr Code</Link>
+      <Link className="btn mb-2 w-full" href={`/login/signupform${continueUrlFragment}`}>sign up with Qr Code Id</Link>
     </div>
   )
 }
