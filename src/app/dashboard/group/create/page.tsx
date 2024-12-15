@@ -3,7 +3,7 @@
 import Form from "next/form";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import createNewGroupFlow from "@/lib/group/createNewGroupFlow";
+import createNewGroupLogic from "@/lib/group/createNewGroupLogic";
 import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId";
 import CookieErrorUI from "@/components/CookieErrorUI";
 import gt from "@/lib/lang/gt";
@@ -44,7 +44,7 @@ export default async function Page() {
           <h1 className="mb-2 text-center">{await gt("group.createGroup")}</h1>
         </div>
 
-        <Form action={createNewGroupFlow} className="w-full">
+        <Form action={createNewGroupLogic} className="w-full">
 
           <div className="form-control mb-4 w-full">
             <label className="form-control w-full mb-4">

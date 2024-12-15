@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from 'next/navigation'
 
-import doesQrCodeIdExist from "@/lib/doesQrCodeIdExist"
+import doesQrCodeIdExist from "@/lib/user/doesQrCodeIdExist";
 
 export async function GET(
   request: Request,
@@ -13,6 +13,11 @@ export async function GET(
     const cookieStore = await cookies();
     cookieStore.delete('qrCodeId');
     cookieStore.set('qrCodeId', qrCodeId);
+  }
+  const cookieStore = await cookies();
+  const isQrCodeCookiePresent = cookieStore.has("qrCodeId")
+  if (!isQrCodeCookiePresent) {
+    redirect(`/login/signupform?qrcode=${qrCodeId}`)
   }
   redirect("/dashboard")
 }

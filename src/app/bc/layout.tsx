@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import Link from 'next/link'
 import NavBar from '@/components/NavBar';
 import checkIfAllowedBc from '@/lib/bc/checkIfAllowedBc'
-import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
+import doesQrCodeIdExist from '@/lib/user/doesQrCodeIdExist';
 import CookieErrorUI from '@/components/CookieErrorUI';
 import gt from '@/lib/lang/gt';
 

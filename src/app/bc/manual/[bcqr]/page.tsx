@@ -4,11 +4,8 @@ import getUserDataWithQrCodeId from "@/lib/user/getUserDataWithQrCodeId";
 import Link from "next/link";
 import Form from "next/form";
 import checkIfUserInside from "@/lib/bc/checkIfUserInside";
-import prisma from "@/lib/prisma";
-import { redirect } from 'next/navigation'
-import updateCount from "@/lib/bc/updateCount";
+import updateCountLogic from "@/lib/bc/updateCountLogic";
 import gt from "@/lib/lang/gt";
-import { buildCustomRoute } from "next/dist/server/lib/router-utils/filesystem";
 
 export default async function Page({ params }: { params: Promise<{ bcqr: string }> }) {
   const parameters = await params;
@@ -41,7 +38,7 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
               <h1 className="mb-4 text-center">{await gt("bc.terms.exit")}</h1>
               <p>{await gt("bc.manualbc.exitMessage")}</p>
             </div>
-            <Form action={updateCount} className="w-full">
+            <Form action={updateCountLogic} className="w-full">
               <input type="hidden" name="qrCodeId" value={qrCodeId} />
               <input type="hidden" name="updatedBorderCrossCount" value={updatedBorderCrossCount} />
               <button className="btn btn-primary mb-2 w-full" type="submit">{await gt("bc.terms.exit")}</button>
@@ -72,7 +69,7 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
               <h1 className="mb-4 text-center">{await gt("bc.terms.enter")}</h1>
               <p>{await gt("bc.manualbc.enterMessage")}</p>
             </div>
-            <Form action={updateCount} className="w-full">
+            <Form action={updateCountLogic} className="w-full">
               <input type="hidden" name="qrCodeId" value={qrCodeId} />
               <input type="hidden" name="updatedBorderCrossCount" value={updatedBorderCrossCount} />
               <button className="btn btn-primary mb-2 w-full" type="submit">{await gt("bc.terms.enter")}</button>

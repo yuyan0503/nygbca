@@ -1,5 +1,5 @@
 import prisma from "../prisma";
-import doesQrCodeIdExist from "../doesQrCodeIdExist";
+import doesQrCodeIdExist from "../user/doesQrCodeIdExist";
 import masterOrSlaveOrThrow from "./masterOrSlaveOrThrow";
 
 export default async function deleteGroupUserTie(groupId: number, qrCodeId: string) {

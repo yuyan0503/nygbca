@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { ReactNode } from 'react'
-import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist'
+import doesQrCodeIdExist from '@/lib/user/doesQrCodeIdExist'
 
 export default async function Layout({ children }: { children: ReactNode }) {
   try {

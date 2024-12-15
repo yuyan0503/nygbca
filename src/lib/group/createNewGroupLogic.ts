@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { NoQrCodeIdInCookieError } from "../errors/errorclasses";
 
 
-export default async function createNewGroupFlow(formData: FormData) {
+export default async function createNewGroupLogic(formData: FormData) {
   let newGroup: number;
 
   try {

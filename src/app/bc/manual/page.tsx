@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { redirect, useSearchParams, useRouter } from 'next/navigation'
 import QrCodeScannerPlugin2 from '@/components/QrCodeScannerPlugin2';
-import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
+import doesQrCodeIdExist from '@/lib/user/doesQrCodeIdExist';
 import ToastBox from '@/components/ToastBox';
 
 export default function Page() {

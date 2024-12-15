@@ -32,6 +32,10 @@ const gtkey: any = {
       en: "cancel",
       ja: "キャンセル"
     },
+    delete: {
+      en: "delete",
+      ja: "削除"
+    },
     error: {
       en: "error",
       ja: "エラー"

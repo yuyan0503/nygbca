@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import NavBar from '@/components/NavBar'
 import { cookies } from 'next/headers'
-import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist'
+import doesQrCodeIdExist from '@/lib/user/doesQrCodeIdExist'
 import CookieErrorUI from '@/components/CookieErrorUI'
 
 export default async function Layout({ children }: { children: ReactNode }) {

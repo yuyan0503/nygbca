@@ -1,6 +1,6 @@
 "use server"
 
-import prisma from "./prisma";
+import prisma from "../prisma"
 
 export default async function doesQrCodeIdExist(qrCodeId: string) {
   try {

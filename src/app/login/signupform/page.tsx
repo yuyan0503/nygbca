@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Form from "next/form"
-import signupLogic from "@/lib/signupLogic"
+import signupLogic from "@/lib/login/signupLogic"
 
 function QrCodeIdInput() {
   return (

@@ -13,9 +13,8 @@ export default async function updateCountOfQrCodeId(qrCodeId: string, updatedCou
       },
     })
     return (updateCount)
+
   } catch (err) {
     throw new Error("cannot update, probably the qrCodeId does not exist")
   }
-
-
 }

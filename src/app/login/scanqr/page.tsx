@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { redirect, useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 import ToastBox from "@/components/ToastBox";
-import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
+import doesQrCodeIdExist from '@/lib/user/doesQrCodeIdExist';
 import QrCodeScannerPlugin2 from '@/components/QrCodeScannerPlugin2';
 
 export default function Page() {
@@ -50,7 +50,7 @@ export default function Page() {
 
   if (scannerActivated === true) {
     return (
-      <div className="relative mx-auto w-full flex flex-col items-center justify-center max-h-screen ">
+      <div className="relative mx-auto w-full">
         <button className="btn btn-square top-2 left-2 z-10 fixed" onClick={returnAction}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

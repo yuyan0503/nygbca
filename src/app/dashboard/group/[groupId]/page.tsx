@@ -1,10 +1,24 @@
-import getGroupInfo from "@/lib/group/getGroupInfo";
-import getGroupInfoFull from "@/lib/group/getGroupInfoFull";
-import Link from "next/link";
 import { cookies } from "next/headers";
+import Link from "next/link";
+import Form from "next/form";
+import gt from "@/lib/lang/gt";
 import CookieErrorUI from "@/components/CookieErrorUI";
 import getGroupJoinId from "@/lib/group/getGroupJoinId"
-import gt from "@/lib/lang/gt";
+import getGroupInfo from "@/lib/group/getGroupInfo";
+import getGroupInfoFull from "@/lib/group/getGroupInfoFull";
+import deleteGroupJoinIdLogic from "@/lib/group/deleteGroupJoinIdLogic";
+import deleteUserFromGroupLogic from "@/lib/group/deleteUserFromGroupLogic";
+import masterOrSlaveOrThrow from "@/lib/group/masterOrSlaveOrThrow";
+
+async function DeleteUserForm({ groupId, qrCodeId }: { groupId: number, qrCodeId: string }) {
+  return (
+    <Form action={deleteUserFromGroupLogic}>
+      <input type="hidden" name="groupId" value={groupId} />
+      <input type="hidden" name="qrCodeId" value={qrCodeId} />
+      <button className="btn" type="submit">{gt("terms.delete")}</button>
+    </Form>
+  )
+}
 
 async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
 
@@ -30,6 +44,7 @@ async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
             <th>{await gt("terms.createdAt")}</th>
             <th>{await gt("terms.updatedAt")}</th>
             <th>{await gt("group.groupId")}</th>
+            <th>{await gt("terms.delete")}</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +53,13 @@ async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
               {Object.entries(value).map(([id, value]) => (
                 <td>{value.toString()}</td>
               ))}
+              <td>
+                <Form action={deleteGroupJoinIdLogic}>
+                  <input type="hidden" name="groupId" value={groupId} />
+                  <input type="hidden" name="joinId" value={value.joinId} />
+                  <button className="btn" type="submit">{gt("terms.delete")}</button>
+                </Form>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -62,8 +84,8 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
       return (<CookieErrorUI />)
     }
     const qrCodeId = qrCodeIdCookie.value
-    const qrCodes = groupUserData.masters.map(item => item.qrCode);
-    const isMaster = qrCodes.includes(qrCodeId)
+    const masterOrSlave = await masterOrSlaveOrThrow(groupId, qrCodeId)
+    const isMaster = masterOrSlave == "master"
 
     return (
       <div className="overflow-x-auto">
@@ -103,6 +125,7 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
               <th>{await gt("dashboard.userId")}</th>
               <th>{await gt("dashboard.firstName")}</th>
               <th>{await gt("dashboard.lastName")}</th>
+              <th>{await gt("terms.delete")}</th>
             </tr>
           </thead>
           <tbody>
@@ -111,6 +134,12 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
                 <td>{value.userId}</td>
                 <td>{value.firstName}</td>
                 <td>{value.lastName}</td>
+                {isMaster ?
+                  <td>
+                    <DeleteUserForm groupId={groupId} qrCodeId={value.qrCode} />
+                  </td> :
+                  <></>
+                }
               </tr>
             ))}
           </tbody>
@@ -128,6 +157,7 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
               <th>{await gt("dashboard.userId")}</th>
               <th>{await gt("dashboard.firstName")}</th>
               <th>{await gt("dashboard.lastName")}</th>
+              <th>{await gt("terms.delete")}</th>
             </tr>
           </thead>
           <tbody>
@@ -136,6 +166,12 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
                 <td>{value.userId}</td>
                 <td>{value.firstName}</td>
                 <td>{value.lastName}</td>
+                {isMaster ?
+                  <td>
+                    <DeleteUserForm groupId={groupId} qrCodeId={value.qrCode} />
+                  </td> :
+                  <></>
+                }
               </tr>
             ))}
           </tbody>
@@ -149,7 +185,6 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
 
       </div>
     )
-
 
   } catch (error) {
     return (<a>{`${await gt("terms.error")}: ${error}`}</a>)

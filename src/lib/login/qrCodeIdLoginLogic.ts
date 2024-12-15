@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
-import doesQrCodeIdExist from '../doesQrCodeIdExist';
+import doesQrCodeIdExist from '../user/doesQrCodeIdExist';
 import getLangPrefByQrCodeId from '../lang/getLangPrefByQrCodeId';
 
 export default async function QrCodeIdLoginLogic(formData: FormData) {
