@@ -11,9 +11,9 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
   const parameters = await params;
   try {
     const qrCodeId = parameters.bcqr
-    const result = await getUserDataWithQrCodeId(qrCodeId)
+    const userData = await getUserDataWithQrCodeId(qrCodeId)
     const isInside = await checkIfUserInside(qrCodeId)
-    const borderCrossCount = result.borderCrossCount
+    const borderCrossCount = userData.borderCrossCount
     const updatedBorderCrossCount = borderCrossCount + 1
 
     if (isInside) {
@@ -33,11 +33,12 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
                 d="M6 18L18 6M6 6l12 12" />
             </svg>
           </Link>
-          <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
+          <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center">
             <div className="prose">
               <h1 className="mb-4 text-center">{await gt("bc.terms.exit")}</h1>
               <p>{await gt("bc.manualbc.exitMessage")}</p>
             </div>
+            <hr className="w-full" />
             <Form action={updateCountLogic} className="w-full">
               <input type="hidden" name="qrCodeId" value={qrCodeId} />
               <input type="hidden" name="updatedBorderCrossCount" value={updatedBorderCrossCount} />
@@ -45,6 +46,24 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
               <Link className="btn btn-neutral mb-2 w-full" href="./">{await gt("terms.cancel")}</Link>
             </Form>
           </div>
+          <table className="table">
+            <caption>{await gt("dashboard.userInfo")}</caption>
+            {/* head */}
+            <thead>
+              <tr>
+                <th>{await gt("terms.id")}</th>
+                <th>{await gt("terms.value")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(userData).map(([id, value]) => (
+                <tr key={id}>
+                  <td>{id}</td>
+                  <td>{value.toString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )
     } else {
@@ -64,7 +83,7 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
                 d="M6 18L18 6M6 6l12 12" />
             </svg>
           </Link>
-          <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center min-h-screen">
+          <div className="mx-auto w-full max-w-xs flex flex-col items-center justify-center">
             <div className="prose">
               <h1 className="mb-4 text-center">{await gt("bc.terms.enter")}</h1>
               <p>{await gt("bc.manualbc.enterMessage")}</p>
@@ -76,6 +95,25 @@ export default async function Page({ params }: { params: Promise<{ bcqr: string 
               <Link className="btn btn-neutral mb-2 w-full" href="./">{await gt("terms.cancel")}</Link>
             </Form>
           </div>
+          <hr className="w-full" />
+          <table className="table">
+            <caption>{await gt("dashboard.userInfo")}</caption>
+            {/* head */}
+            <thead>
+              <tr>
+                <th>{await gt("terms.id")}</th>
+                <th>{await gt("terms.value")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(userData).map(([id, value]) => (
+                <tr key={id}>
+                  <td>{id}</td>
+                  <td>{value.toString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )
     }
