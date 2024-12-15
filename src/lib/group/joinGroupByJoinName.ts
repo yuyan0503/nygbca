@@ -1,30 +1,38 @@
 import prisma from "../prisma";
+import deleteGroupUserTie from "./deleteGroupUserTie";
+import getGroupInfoFull from "./getGroupInfoFull";
 import getGroupJoinIdInfoByJoinName from "./getGroupJoinIdInfoByJoinName";
 import joinGroup from "./joinGroup";
+import updateGroupJoinIdCountOrThrow from "./updateGroupJoinIdCountOrThrow";
 
 export default async function joinGroupByJoinName(qrCodeId: string, joinName: string) {
   try {
+    const updatedGroupJoinIdCount = updateGroupJoinIdCountOrThrow(joinName)
     const groupJoinIdInfo = await getGroupJoinIdInfoByJoinName(joinName)
-    const maxUse = groupJoinIdInfo.maxUse
-    const updatedUse = groupJoinIdInfo.currentUse + 1
-    if (maxUse < updatedUse) {
-      throw new Error("it cannot be used anymore, due to maxUse<=currentUse")
-    }
     const joinId = groupJoinIdInfo.joinId
     const updatingGroupId = groupJoinIdInfo.joiningGroupId
     const isMaster = groupJoinIdInfo.isMaster
-    const groupInfo = joinGroup(qrCodeId, updatingGroupId, isMaster)
-    const updateGroupJoinIdCount = await prisma.groupJoinId.update({
-      where: {
-        joinId,
-      },
-      data: {
-        currentUse: updatedUse,
-      }
-    })
+
+    const groupInfoFull = await getGroupInfoFull(updatingGroupId)
+    const masterQrCodes = groupInfoFull.masters.map(item => item.qrCode);
+
+    const isMasterAlready = masterQrCodes.includes(qrCodeId)
+    if (isMasterAlready) {
+      return (groupInfoFull)
+    }
+
+    const slaveQrCodes = groupInfoFull.slaves.map(item => item.qrCode);
+    const isSlaveAlready = slaveQrCodes.includes(qrCodeId)
+
+    if (isSlaveAlready) {
+      const deletedUserTie = await deleteGroupUserTie(updatingGroupId, qrCodeId)
+      const groupInfo = await joinGroup(qrCodeId, updatingGroupId, isMaster)
+    }
+
+    const groupInfo = await joinGroup(qrCodeId, updatingGroupId, isMaster)
     return (groupInfo)
+
   } catch (err) {
     throw new Error("an error occured when joining group by joinName")
   }
-
 }

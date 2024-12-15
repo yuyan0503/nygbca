@@ -3,7 +3,15 @@
 import getUserDataWithQrCodeId from "../user/getUserDataWithQrCodeId";
 import prisma from "../prisma";
 
-export default async function joinGroup(qrCodeId:string, updatingGroupId:number, isMaster:boolean) {
+/**
+ * 
+ * @param qrCodeId 
+ * @param updatingGroupId 
+ * @param isMaster 
+ * @returns updated group information
+ * @throws new Error when it fails
+ */
+export default async function joinGroup(qrCodeId: string, updatingGroupId: number, isMaster: boolean) {
 
   let updateGroup;
 
@@ -58,9 +66,13 @@ export default async function joinGroup(qrCodeId:string, updatingGroupId:number,
       });
     }
 
-    return(updateGroup)
+    return (updateGroup)
 
   } catch (error) {
-    return console.error("joining group failed:", error);
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    } else {
+      throw new Error("An error occured when joining group at joinGroup.ts")
+    }
   }
 }

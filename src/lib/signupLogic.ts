@@ -42,7 +42,6 @@ export default async function signupLogic(formData: FormData) {
   }
 
   const continueUrl = formData.get('continueUrl')?.toString()
-  console.log(continueUrl)
   if (Boolean(continueUrl) && continueUrl != undefined) {
     redirect(continueUrl)
   } else {

@@ -7,13 +7,20 @@ import Form from 'next/form'
 import createGroupJoinIdLogic from '@/lib/group/createGroupJoinIdLogic';
 import CookieErrorUI from "@/components/CookieErrorUI";
 import gt from "@/lib/lang/gt";
+import ToastBox from "@/components/ToastBox";
 
-export default async function Page({ params }: { params: Promise<{ groupId: string }> }) {
+export default async function Page({
+  params, searchParams
+}: {
+  params: Promise<{ groupId: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const parameters = await params;
   const groupId = parseInt(parameters.groupId)
   const groupUserData = await getGroupInfoFull(groupId)
   const cookieStore = await cookies()
   const qrCodeIdCookie = cookieStore.get('qrCodeId')
+  const status = (await searchParams).status
+  const isError = status == "error"
 
   if (!qrCodeIdCookie) {
     // If the cookie is not found, return error
@@ -22,9 +29,9 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
   const qrCodeId = qrCodeIdCookie.value
   const qrCodes = groupUserData.masters.map(item => item.qrCode);
   const isMaster = qrCodes.includes(qrCodeId)
+
   if (isMaster) {
     return (
-
       <>
         <div className="overflow-x-auto">
           <div className="flex justify-start">
@@ -61,9 +68,14 @@ export default async function Page({ params }: { params: Promise<{ groupId: stri
                 <input type="checkbox" name="isMaster" className="toggle" />
               </label>
             </div>
+
             <button className="btn btn-primary mb-2 w-full" type="submit">{await gt("terms.submit")}</button>
             <Link className="btn btn-neutral mb-2 w-full" href="./">{await gt("terms.cancel")}</Link>
           </Form>
+        </div>
+
+        <div className="toast toast-end">
+          {isError ? <ToastBox message="An error occured." color={"info"} /> : <></>}
         </div>
       </>
     );

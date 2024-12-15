@@ -1,24 +1,32 @@
 "use client"
 
 import { useState } from 'react';
-import { redirect, useRouter } from 'next/navigation'
-import getUserDataWithQrCodeId from '@/lib/user/getUserDataWithQrCodeId';
-import checkIfUserInside from '@/lib/bc/checkIfUserInside';
+import { redirect, useSearchParams, useRouter } from 'next/navigation'
 import QrCodeScannerPlugin2 from '@/components/QrCodeScannerPlugin2';
+import doesQrCodeIdExist from '@/lib/doesQrCodeIdExist';
+import ToastBox from '@/components/ToastBox';
 
 export default function Page() {
   const [scannerActivated, setScannerActivated] = useState(true)
   const router = useRouter()
 
+  const searchParams = useSearchParams()
+  const status = searchParams.get('status')
+  const isQrCodeError = Boolean(status)
+
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
     try {
-      const qrCodeId = decodedText.split('/').filter(Boolean).pop()
-      const result = await getUserDataWithQrCodeId(qrCodeId);
-      const isInside = await checkIfUserInside(qrCodeId)
       setScannerActivated(false)
-      router.push(`/bc/manual/${qrCodeId}`)
+      const qrCodeId = decodedText.split('/').filter(Boolean).pop()
+      const isQrCodeLegit = await doesQrCodeIdExist(qrCodeId)
+
+      if (isQrCodeLegit) {
+        router.push(`/bc/manual/${qrCodeId}`)
+      } else {
+        router.push(`/bc/manual?status=qrcodeerror`)
+      }
     } catch (err) {
-      console.error("invalid qrCodeId")
+      router.push(`/bc/manual?status=qrcodeerror`)
     }
   }
 
@@ -29,7 +37,6 @@ export default function Page() {
 
   if (scannerActivated == true) {
     return (
-
       <div className="relative">
         <button className="btn btn-square top-2 left-2 z-10 fixed" onClick={returnAction}>
           <svg
@@ -55,6 +62,7 @@ export default function Page() {
           <div className="alert alert-info">
             <span>If an UI error occurs, refresh this page.</span>
           </div>
+          {isQrCodeError ? <ToastBox message="Error: cannot find qrCodeId" color="info" /> : <></>}
         </div>
       </div>
     )

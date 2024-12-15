@@ -16,16 +16,10 @@ export default function Page() {
   const onNewScanResult = async (decodedText: any, decodedResult: any) => {
 
     qrCodeId = decodedText.split('/').filter(Boolean).pop()
-    try {
-      if (typeof continueUrl == "string") {
-        router.push(`/login/signupform?qrcode=${qrCodeId}&continue=${continueUrl}`)
-      } else {
-        router.push(`/login/signupform?qrcode=${qrCodeId}`)
-      }
-
-    } catch (error) {
-      // Handle any errors here
-      console.error(error)
+    if (typeof continueUrl == "string") {
+      router.push(`/login/signupform?qrcode=${qrCodeId}&continue=${continueUrl}`)
+    } else {
+      router.push(`/login/signupform?qrcode=${qrCodeId}`)
     }
   };
 
