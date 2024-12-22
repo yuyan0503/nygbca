@@ -19,7 +19,7 @@ export default async function Page({
       <Link className="btn btn-primary mb-2 w-full" href={`/login/scanqr${continueUrlFragment}`}>log in by scanning Qr Code</Link>
       <Link className="btn btn-neutral mb-2 w-full" href={`/login/loginform${continueUrlFragment}`}>log in by entering Qr Code Id </Link>
       <hr className="mb-4 w-full" />
-      <p className="mb-2">Don't have an account?</p>
+      <p className="mb-2">{"Don't have an account?"}</p>
       <Link className="btn btn-neutral mb-2 w-full" href={`/login/signup${continueUrlFragment}`}>sign up by scanning Qr Code</Link>
       <Link className="btn mb-2 w-full" href={`/login/signupform${continueUrlFragment}`}>sign up with Qr Code Id</Link>
     </div>

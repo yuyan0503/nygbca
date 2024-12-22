@@ -2,7 +2,7 @@ This is a project created with [Next.js](https://nextjs.org) , which is bootstra
 
 ## Getting Started
 
-After cloning and downloading the required dependencies, create dev.db in prisma/, and then run
+After cloning and downloading the required dependencies, rename .env.example to .env and change it to your credintials, and then run
 
 ```bash
 npx prisma db push
@@ -14,7 +14,7 @@ npx prisma db push
 npm run dev
 ```
 
-Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 Most part of the web app should be included within the /src file. 
 
@@ -23,6 +23,34 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 Before making a pull request, a quick check for bugs will be very appreciated. 
 
 When creating new files, using .ts and .tsx is recommended, although .js is also acceptable. 
+
+## Deploying
+
+To deploy, there are multiple ways available. Start by cloning and cd into the nygbca folder.
+
+### Docker
+To deploy with docker, run the following
+
+```bash
+docker build -t nygbca .
+```
+
+then, to start, run
+
+```bash
+docker run -p 3000:3000 -e DATABASE_URL=postgresql://ACCOUNT:PASSWORD@YOUR.DATABASE.HOSTNAME.com:PORT/DATABASE nygbca
+```
+
+Then open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Node.js server
+To use a conventional Node.js server, simply run the following.
+
+```bash
+npm run build && npm run start
+```
+
+Then open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More
 

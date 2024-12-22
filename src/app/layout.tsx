@@ -1,5 +1,6 @@
 import 'tailwindcss/tailwind.css'
 import { ReactNode } from 'react';
+import Script from 'next/script';
 
 export const metadata = {
   title: "nygbca",
@@ -11,6 +12,12 @@ export const dynamic = 'force-dynamic';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://cdn.tailwindcss.com"
+          strategy="afterInteractive" // Loads the script after the page is interactive
+        />
+      </head>
       <body>
         <>
           {children}

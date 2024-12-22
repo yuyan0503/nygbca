@@ -53,7 +53,7 @@ export default function QrCodeScannerPlugin2(props: any) {
         console.error('Failed to clear html5QrcodeScanner. ', error);
       });
     };
-  }, [props.qrCodeSuccessCallback, props.qrCodeErrorCallback, props.fps, props.qrbox, props.aspectRatio, props.disableFlip]);
+  }, [props.qrCodeSuccessCallback, props.qrCodeErrorCallback, props.fps, props.qrbox, props.aspectRatio, props.disableFlip, props]);
 
   return <div className="mx-auto max-w-4xl flex-1" ref={regionRef} id={qrcodeRegionId} />;
 }

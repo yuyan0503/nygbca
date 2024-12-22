@@ -51,7 +51,7 @@ async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
           {Object.entries(joinIdData.joinId).map(([id, value]) => (
             <tr key={id}>
               {Object.entries(value).map(([id, value]) => (
-                <td>{value.toString()}</td>
+                <td key={id}>{value.toString()}</td>
               ))}
               <td>
                 <Form action={deleteGroupJoinIdLogic}>
