@@ -65,7 +65,7 @@ const gtkey: any = {
     },
     noPermission: {
       en: "You do not have permission to access this page.",
-      ja: "このページにアクセスする権限がありません。"
+      ja: "このページの閲覧権限がありません。"
     }
   },
 
@@ -148,26 +148,26 @@ const gtkey: any = {
   groupJoinId: {
     joinCode: {
       en: "Join Code",
-      ja: "ジョインコード"
+      ja: "参加コード"
     },
     joinCodeUniqueAware: {
       en: "Group Join Code. Must be unique.",
-      ja: "グループのジョインコード。他のジョインコードとかぶっていないものにしてください。"
+      ja: "グループの参加コード。他の参加コードとかぶっていないものにしてください。"
     },
     inputJoinName: {
       en: "enter your join code",
-      ja: "ジョインコードを入力"
+      ja: "参加コードを入力"
     },
     generateGroupJoinId: {
       en: "create Group Join Code",
-      ja: "グループのジョインコードを生成"
+      ja: "グループの参加コードを生成"
     },
     currentUse: {
-      en: "number of times used",
+      en: "usage",
       ja: "使用回数"
     },
     maxUse: {
-      en: "maximum times the code is usable",
+      en: "maximun allowed usage",
       ja: "最大使用回数"
     },
     isMaster: {

@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
-import daisyui from "daisyui"
+import daisyui from "daisyui";
 import typographyPlugin from '@tailwindcss/typography';
 
-module.exports = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
