@@ -29,8 +29,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       )
     } else {
       return (
-        <>
-          <NavBar />
+        <NavBar>
           <div className="w-full flex flex-col items-center justify-center mx-auto max-w-xs">
             <div className="prose">
               <h1 className="mb-4 text-center">{await gt("terms.accessBlocked")}</h1>
@@ -38,7 +37,8 @@ export default async function Layout({ children }: { children: ReactNode }) {
               <Link className="btn btn-primary mb-4 w-full" href={`/login`}>{await gt("dashboard.phrases.backToDashboard")}</Link>
             </div>
           </div>
-        </>
+        </NavBar>
+
       )
     }
   } else {

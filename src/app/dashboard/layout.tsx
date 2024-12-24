@@ -19,10 +19,12 @@ export default async function Layout({ children }: { children: ReactNode }) {
   if (isQrCodeLegit) {
     return (
       <div className="flex flex-col h-screen">
-        <NavBar />
-        <div className="container mx-auto px-4 flex flex-col flex-1">
-          {children}
-        </div>
+        <NavBar>
+          <div className="w-full mx-auto flex flex-col flex-1">
+            {children}
+          </div>
+        </NavBar>
+
       </div>
     )
   } else {

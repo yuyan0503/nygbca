@@ -15,7 +15,7 @@ async function DeleteUserForm({ groupId, qrCodeId }: { groupId: number, qrCodeId
     <Form action={deleteUserFromGroupLogic}>
       <input type="hidden" name="groupId" value={groupId} />
       <input type="hidden" name="qrCodeId" value={qrCodeId} />
-      <button className="btn" type="submit">{gt("terms.delete")}</button>
+      <button className="link" type="submit">{gt("terms.delete")}</button>
     </Form>
   )
 }
@@ -23,6 +23,7 @@ async function DeleteUserForm({ groupId, qrCodeId }: { groupId: number, qrCodeId
 async function PrivilegedJoinIdTable({ groupId }: { groupId: number }) {
 
   const joinIdData = await getGroupJoinId(groupId)
+  
   return (
     <>
       <div className="overflow-x-auto">

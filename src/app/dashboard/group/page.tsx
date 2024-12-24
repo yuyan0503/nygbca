@@ -23,13 +23,9 @@ export default async function Page() {
         <div className="flex justify-start">
           <Link role="button" className="btn" href="/dashboard">{await gt("dashboard.phrases.backToDashboard")}</Link>
         </div>
-        <div className="flex justify-end">
-          <div className="px-2">
-            <Link role="button" className="btn" href="/dashboard/group/join">{await gt("group.joinGroup")}</Link>
-          </div>
-          <div className="px-2">
-            <Link role="button" className="btn" href="/dashboard/group/create">{await gt("group.createGroup")}</Link>
-          </div>
+        <div className="flex justify-end join join-vertical sm:join-horizontal px-2">
+          <Link role="button" className="btn join-item" href="/dashboard/group/join">{await gt("group.joinGroup")}</Link>
+          <Link role="button" className="btn join-item" href="/dashboard/group/create">{await gt("group.createGroup")}</Link>
         </div>
       </div>
       <table className="table">

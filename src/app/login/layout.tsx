@@ -11,7 +11,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
     if (!qrCodeIdCookie) {
       // If the cookie is not found, return children
       return (
-        <div className="container mx-auto px-4">
+        <div className="mx-auto px-4">
           {children}
         </div>
       )
