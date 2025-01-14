@@ -28,6 +28,6 @@ export default async function gt(key: string) {
   if (langPref in langKey) {
     return (langKey[langPref])
   } else {
-    return langKey.en
+    return langKey.ja
   }
 }
